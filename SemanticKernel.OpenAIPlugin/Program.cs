@@ -19,7 +19,7 @@ kernelBuilder.
 
 var kernel = kernelBuilder.Build();
 
-const string pluginManifestUrl = "http://localhost:7078/api/.well-known/ai-plugin.json";
+const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
 await kernel.ImportPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
 
 var function = kernel.Functions.GetFunction("UnitedStatesPlugin", "GetPopulation");

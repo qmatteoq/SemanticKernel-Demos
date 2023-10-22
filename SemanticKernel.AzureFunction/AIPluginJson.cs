@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -12,7 +13,9 @@ namespace SemanticKernel.AzureFunction
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = ".well-known/ai-plugin.json")] HttpRequest req)
         {
             var currentDomain = $"{req.Scheme}://{req.Host.Value}";
-            var result = File.ReadAllText(@"D:\src\events\Codemotion2023\SemanticKernel\SemanticKernel.AzureFunction\manifest\ai-plugin.json");
+            var binDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var rootDirectory = Path.GetFullPath(Path.Combine(binDirectory, ".."));
+            var result = File.ReadAllText(rootDirectory + "/manifest/ai-plugin.json");
             var json = result.Replace("{url}", currentDomain);
             return new OkObjectResult(json);
         }
