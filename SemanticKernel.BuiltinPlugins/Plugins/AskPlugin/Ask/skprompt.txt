@@ -1,0 +1,3 @@
+﻿Answer the question between triple backticks in a concise way.
+
+```{{$input}}```

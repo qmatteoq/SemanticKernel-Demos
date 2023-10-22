@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>d6a28a11-60a1-48f7-b334-15064483b85b</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+      <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta2" />
+      <PackageReference Include="Microsoft.SemanticKernel.Functions.OpenAPI" Version="1.0.0-beta1" />
+    </ItemGroup>
+
+</Project>
