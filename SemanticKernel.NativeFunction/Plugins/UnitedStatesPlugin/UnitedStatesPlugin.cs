@@ -8,7 +8,7 @@ namespace SemanticKernel.NativeFunction.Plugins.UnitedStatesPlugin
     public class UnitedStatesPlugin
     {
         [SKFunction, Description("Get the United States population for a specific year")]
-        public async Task<string> GetPopulation(int year)
+        public async Task<string> GetPopulation([Description("The year")]int year)
         {
             string request = "https://datausa.io/api/data?drilldowns=Nation&measures=Population";
             HttpClient client = new HttpClient();

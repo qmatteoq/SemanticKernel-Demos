@@ -1,0 +1,43 @@
+{
+    "version": "1.0",
+    "skillName": "MailPlugin",
+    "functionName": "WriteBusinessMail",
+    "description": "Write a business mail",
+    "filePath": "Plugins\\MailPlugin\\WriteBusinessMail\\skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-4",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-4",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "modelId": null,
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 500,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "David, I'm going to work on your project tomorrow"
+                }
+            ],
+            "output": {
+                "prompt": "Rewrite the text between triple backticks into a business mail. Use a professional tone, be clar and concise.\r\nSign the mail as AI Assistant.\r\n\r\nText: ```David, I'm going to work on your project tomorrow```",
+                "durationInMilliseconds": 6607.2733,
+                "inputTokens": 45,
+                "outputTokens": 71,
+                "result": "Subject: Upcoming Project Work Schedule\n\nDear David,\n\nI hope this message finds you well. I am writing to inform you that I have scheduled to commence work on your project tomorrow. \n\nShould you have any questions or need further clarification, please do not hesitate to contact me. \n\nThank you for your attention to this matter.\n\nBest Regards,\n\nAI Assistant",
+                "chatCompletionResult": "Subject: Upcoming Project Work Schedule\n\nDear David,\n\nI hope this message finds you well. I am writing to inform you that I have scheduled to commence work on your project tomorrow. \n\nShould you have any questions or need further clarification, please do not hesitate to contact me. \n\nThank you for your attention to this matter.\n\nBest Regards,\n\nAI Assistant"
+            }
+        }
+    ]
+}

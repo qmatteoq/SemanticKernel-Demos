@@ -19,8 +19,8 @@ kernelBuilder.
 
 var kernel = kernelBuilder.Build();
 
-//var bingConnector = new BingConnector(bingKey);
-//kernel.ImportFunctions(new WebSearchEnginePlugin(bingConnector), "BingPlugin");
+var bingConnector = new BingConnector(bingKey);
+kernel.ImportFunctions(new WebSearchEnginePlugin(bingConnector), "BingPlugin");
 
 var pluginsDirectory = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Plugins");
 kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "AskPlugin");

@@ -1,0 +1,42 @@
+{
+    "version": "1.0",
+    "skillName": "MailPlugin",
+    "functionName": "WriteBusinessMail",
+    "description": "Write a business mail",
+    "filePath": "SemanticKernel.Orchestration\\Plugins\\MailPlugin\\WriteBusinessMail\\skprompt.txt",
+    "results": [
+        {
+            "completionConfig": {
+                "label": "gpt-4",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-4",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 500,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "David I'll see you tomorrow"
+                }
+            ],
+            "output": {
+                "prompt": "Rewrite the text between triple backticks into a business mail. Use a professional tone, be clar and concise.\r\nSign the mail as AI Assistant.\r\n\r\nText: ```David I'll see you tomorrow```",
+                "durationInMilliseconds": 5168.2913,
+                "inputTokens": 40,
+                "outputTokens": 40,
+                "result": "Subject: Appointment Confirmation for Tomorrow\n\nDear David,\n\nI am writing to confirm our scheduled meeting for tomorrow. I look forward to our discussion and the opportunity to assist you further.\n\nBest Regards,\n\nAI Assistant",
+                "chatCompletionResult": "Subject: Appointment Confirmation for Tomorrow\n\nDear David,\n\nI am writing to confirm our scheduled meeting for tomorrow. I look forward to our discussion and the opportunity to assist you further.\n\nBest Regards,\n\nAI Assistant"
+            }
+        }
+    ]
+}

@@ -31,5 +31,5 @@ var result = await kernel.RunAsync(
     function
 );
 
-Console.WriteLine(result);
+Console.WriteLine(result.GetValue<string>());
 Console.ReadLine();

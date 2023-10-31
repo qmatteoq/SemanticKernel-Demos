@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.AI;
+using Microsoft.SemanticKernel.Connectors.AI.OpenAI;
 using Microsoft.SemanticKernel.Orchestration;
+using Microsoft.SemanticKernel.TemplateEngine;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("8a4821ee-3680-41af-8b37-1b9a978ac962")
@@ -22,7 +25,12 @@ Sign the mail as AI Assistant.
 Text: ```{{$input}}```
 """;
 
-var mailFunction = kernel.CreateSemanticFunction(prompt);
+
+var mailFunction = kernel.CreateSemanticFunction(prompt, new OpenAIRequestSettings
+{
+    Temperature = 0.5,
+    MaxTokens = 1000
+});
 
 ContextVariables variables = new ContextVariables
 {
