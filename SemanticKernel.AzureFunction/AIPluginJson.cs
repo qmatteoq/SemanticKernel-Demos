@@ -1,23 +1,27 @@
 ﻿using System.IO;
+using System.Net;
 using System.Reflection;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using System.Threading.Tasks;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace SemanticKernel.AzureFunction
 {
     public class AIPluginJson
     {
-        [FunctionName("GetAIPluginJson")]
-        public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = ".well-known/ai-plugin.json")] HttpRequest req)
+        [Function("GetAIPluginJson")]
+        public async Task<HttpResponseData> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = ".well-known/ai-plugin.json")] HttpRequestData req)
         {
-            var currentDomain = $"{req.Scheme}://{req.Host.Value}";
+            var currentDomain = $"{req.Url.Scheme}://{req.Url.Host}:{req.Url.Port}";
             var binDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var rootDirectory = Path.GetFullPath(Path.Combine(binDirectory, ".."));
-            var result = File.ReadAllText(rootDirectory + "/manifest/ai-plugin.json");
+            var result = File.ReadAllText(binDirectory + "/manifest/ai-plugin.json");
             var json = result.Replace("{url}", currentDomain);
-            return new OkObjectResult(json);
+
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteStringAsync(json);
+
+            return response;
         }
     }
 }

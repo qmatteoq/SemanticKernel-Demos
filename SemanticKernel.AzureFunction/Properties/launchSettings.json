@@ -2,7 +2,7 @@
   "profiles": {
     "UnitedStatesDataFunction": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7098",
+      "commandLineArgs": "--port 7069",
       "launchBrowser": false
     }
   }
