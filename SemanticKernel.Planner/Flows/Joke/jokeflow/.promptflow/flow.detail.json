@@ -1,0 +1,361 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "topic": "cats"
+      },
+      "output": {
+        "joke": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a",
+      "root_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2023-11-14T13:09:29.967602Z",
+      "end_time": "2023-11-14T13:09:31.620762Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are a bot can tell good jokes\n\nuser:\n\nA joke about {{topic}} please",
+            "deployment_name": "gpt-35-turbo",
+            "max_tokens": 256,
+            "temperature": 1.0,
+            "topic": "cats"
+          },
+          "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+          "start_time": 1699963769.969572,
+          "end_time": 1699963771.610746,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are a bot can tell good jokes"
+                  },
+                  {
+                    "role": "user",
+                    "content": "A joke about cats please"
+                  }
+                ],
+                "temperature": 1.0,
+                "top_p": 1.0,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": 256,
+                "presence_penalty": 0.0,
+                "frequency_penalty": 0.0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8KnSVhcfaq9yVIn8MtAJmts2unZ1t",
+                "object": "chat.completion",
+                "created": 1699967371,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 26,
+                  "completion_tokens": 30,
+                  "total_tokens": 56
+                }
+              },
+              "start_time": 1699963770.075006,
+              "end_time": 1699963771.610746,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "joke"
+        },
+        {
+          "name": "echo",
+          "type": "Tool",
+          "inputs": {
+            "input": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+          },
+          "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+          "start_time": 1699963771.620762,
+          "end_time": 1699963771.620762,
+          "error": null,
+          "children": null,
+          "node_name": "echo"
+        }
+      ],
+      "variant_id": "",
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 1.65316,
+        "total_tokens": 56
+      },
+      "result": {
+        "joke": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+      },
+      "upload_metrics": false
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "joke",
+      "flow_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a",
+      "run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a_joke_0",
+      "status": "Completed",
+      "inputs": {
+        "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are a bot can tell good jokes\n\nuser:\n\nA joke about {{topic}} please",
+        "deployment_name": "gpt-35-turbo",
+        "max_tokens": 256,
+        "temperature": 1.0,
+        "topic": "cats"
+      },
+      "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a_0",
+      "start_time": "2023-11-14T13:09:29.969572Z",
+      "end_time": "2023-11-14T13:09:31.610746Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are a bot can tell good jokes\n\nuser:\n\nA joke about {{topic}} please",
+            "deployment_name": "gpt-35-turbo",
+            "max_tokens": 256,
+            "temperature": 1.0,
+            "topic": "cats"
+          },
+          "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+          "start_time": 1699963769.969572,
+          "end_time": 1699963771.610746,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are a bot can tell good jokes"
+                  },
+                  {
+                    "role": "user",
+                    "content": "A joke about cats please"
+                  }
+                ],
+                "temperature": 1.0,
+                "top_p": 1.0,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": 256,
+                "presence_penalty": 0.0,
+                "frequency_penalty": 0.0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8KnSVhcfaq9yVIn8MtAJmts2unZ1t",
+                "object": "chat.completion",
+                "created": 1699967371,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 26,
+                  "completion_tokens": 30,
+                  "total_tokens": 56
+                }
+              },
+              "start_time": 1699963770.075006,
+              "end_time": 1699963771.610746,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "joke"
+        }
+      ],
+      "variant_id": "",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "prompt_tokens": 26,
+        "completion_tokens": 30,
+        "total_tokens": 56,
+        "duration": 1.641174
+      },
+      "result": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+    },
+    {
+      "node": "echo",
+      "flow_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a",
+      "run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a_echo_0",
+      "status": "Completed",
+      "inputs": {
+        "input": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+      },
+      "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "1cbd6c3f-b090-49df-b6b2-06578735919a_0",
+      "start_time": "2023-11-14T13:09:31.620762Z",
+      "end_time": "2023-11-14T13:09:31.620762Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "echo",
+          "type": "Tool",
+          "inputs": {
+            "input": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+          },
+          "output": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!",
+          "start_time": 1699963771.620762,
+          "end_time": 1699963771.620762,
+          "error": null,
+          "children": null,
+          "node_name": "echo"
+        }
+      ],
+      "variant_id": "",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 0.0
+      },
+      "result": "Sure, here's a cat joke for you:\n\nWhy don't cats play poker in the jungle?\n\nBecause there are too many cheetahs!"
+    }
+  ]
+}

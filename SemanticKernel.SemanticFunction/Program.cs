@@ -12,7 +12,7 @@ string endpoint = configuration["AzureOpenAI:Endpoint"];
 
 var kernelBuilder = new KernelBuilder();
 kernelBuilder.
-    WithAzureChatCompletionService(deploymentName, endpoint, apiKey);
+    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
 
 var kernel = kernelBuilder.Build();
 
@@ -24,7 +24,7 @@ var function = kernel.Functions.GetFunction("MailPlugin", "WriteBusinessMail");
 
 ContextVariables variables = new ContextVariables
 {
-    { "input", "Tell do David that I'm going to finish the business plan by the end of the week." }
+    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
 };
 
 var result = await kernel.RunAsync(

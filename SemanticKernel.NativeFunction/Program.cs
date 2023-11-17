@@ -13,7 +13,7 @@ string endpoint = configuration["AzureOpenAI:Endpoint"];
 
 var kernelBuilder = new KernelBuilder();
 kernelBuilder.
-    WithAzureChatCompletionService(deploymentName, endpoint, apiKey);
+    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
 
 var kernel = kernelBuilder.Build();
 

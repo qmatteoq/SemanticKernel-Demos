@@ -14,7 +14,6 @@ namespace SemanticKernel.AzureFunction
         {
             var currentDomain = $"{req.Url.Scheme}://{req.Url.Host}:{req.Url.Port}";
             var binDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var rootDirectory = Path.GetFullPath(Path.Combine(binDirectory, ".."));
             var result = File.ReadAllText(binDirectory + "/manifest/ai-plugin.json");
             var json = result.Replace("{url}", currentDomain);
 

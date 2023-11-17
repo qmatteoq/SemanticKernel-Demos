@@ -1,0 +1,11 @@
+{
+  "nodes": {
+    "us_population_planner": {
+      "variant_0": {
+        "inputs": {
+          "input1": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+id: template_standard_flow
+name: Template Standard Flow
+environment:
+  python_requirements_txt: requirements.txt
+inputs:
+  question:
+    type: string
+    default: What's the distance between Earth and the Sun?
+outputs:
+  mail:
+    type: string
+    reference: ${WriteMail.output}
+nodes:
+- name: ask
+  use_variants: true
+- name: WriteMail
+  type: llm
+  source:
+    type: code
+    path: WriteMail.jinja2
+  inputs:
+    deployment_name: gpt-35-turbo
+    text: ${ask.output}
+  connection: AzureOpenAIConnection
+  api: chat
+node_variants:
+  ask:
+    default_variant_id: variant_0
+    variants:
+      variant_0:
+        node:
+          type: llm
+          source:
+            type: code
+            path: Ask.jinja2
+          inputs:
+            deployment_name: gpt-35-turbo
+            question: ${inputs.question}
+          connection: AzureOpenAIConnection
+          api: chat
+      variant_1:
+        node:
+          type: llm
+          source:
+            type: code
+            path: ask_variant_1.jinja2
+          inputs:
+            deployment_name: gpt-35-turbo
+            question: ${inputs.question}
+          connection: AzureOpenAIConnection
+          api: chat

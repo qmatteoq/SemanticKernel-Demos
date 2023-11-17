@@ -1,0 +1,18 @@
+inputs:
+  text:
+    type: string
+    default: The US population in 2018
+outputs:
+  result:
+    type: string
+    reference: ${us_population_planner.output}
+nodes:
+- name: us_population_planner
+  type: python
+  source:
+    type: code
+    path: us_population_planner.py
+  inputs:
+    input: ${inputs.text}
+    conn: AzureOpenAIConnection
+    deployment_name: gpt-35-turbo

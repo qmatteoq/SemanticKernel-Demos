@@ -1,0 +1,1120 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "6d517aee-8ae7-4976-b88e-b54e80105977_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "question": "What's the distance between Earth and the Sun?"
+      },
+      "output": {
+        "mail": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977",
+      "root_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2023-11-14T13:19:00.774438Z",
+      "end_time": "2023-11-14T13:19:05.224603Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a clear and concise manner.\n\nuser:\n\n{{question}}\n",
+            "deployment_name": "gpt-35-turbo",
+            "question": "What's the distance between Earth and the Sun?"
+          },
+          "output": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+          "start_time": 1699964340.776447,
+          "end_time": 1699964343.759885,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistasnt that can answer questions. Answer the following question in a clear and concise manner."
+                  },
+                  {
+                    "role": "user",
+                    "content": "What's the distance between Earth and the Sun?\n"
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knbjy26qgS1dBZf3DvSkLaqdCOxX",
+                "object": "chat.completion",
+                "created": 1699967943,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU)."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 45,
+                  "completion_tokens": 34,
+                  "total_tokens": 79
+                }
+              },
+              "start_time": 1699964341.796323,
+              "end_time": 1699964343.759885,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "ask"
+        },
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+            "deployment_name": "gpt-35-turbo",
+            "text": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+            "stream": false
+          },
+          "output": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant",
+          "start_time": 1699964343.763407,
+          "end_time": 1699964345.21916,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistance which helps users writing professional mails."
+                  },
+                  {
+                    "role": "user",
+                    "content": "Rewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU)."
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8KnbkgjQL1WK7DeKERDJY1bWPQ7HY",
+                "object": "chat.completion",
+                "created": 1699967944,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant"
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 87,
+                  "completion_tokens": 95,
+                  "total_tokens": 182
+                }
+              },
+              "start_time": 1699964343.764406,
+              "end_time": 1699964345.21916,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "WriteMail"
+        }
+      ],
+      "variant_id": "variant_0",
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 4.450165,
+        "total_tokens": 261
+      },
+      "result": {
+        "mail": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant"
+      },
+      "upload_metrics": false
+    },
+    {
+      "run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "question": "What's the distance between Earth and the Sun?"
+      },
+      "output": {
+        "mail": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant."
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178",
+      "root_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178",
+      "source_run_id": null,
+      "flow_id": "template_standard_flow",
+      "start_time": "2023-11-14T13:19:19.705777Z",
+      "end_time": "2023-11-14T13:19:28.304154Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a confusing and very long way.\n\nuser:\n\n{{question}}\n",
+            "deployment_name": "gpt-35-turbo",
+            "question": "What's the distance between Earth and the Sun?"
+          },
+          "output": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+          "start_time": 1699964359.709424,
+          "end_time": 1699964366.108263,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistasnt that can answer questions. Answer the following question in a confusing and very long way."
+                  },
+                  {
+                    "role": "user",
+                    "content": "What's the distance between Earth and the Sun?\n"
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knc1I1sULmFNdCdLNANbfTx0giuO",
+                "object": "chat.completion",
+                "created": 1699967961,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 46,
+                  "completion_tokens": 315,
+                  "total_tokens": 361
+                }
+              },
+              "start_time": 1699964359.793469,
+              "end_time": 1699964366.108263,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "ask"
+        },
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+            "deployment_name": "gpt-35-turbo",
+            "text": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+            "stream": false
+          },
+          "output": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant.",
+          "start_time": 1699964366.111196,
+          "end_time": 1699964368.29981,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistance which helps users writing professional mails."
+                  },
+                  {
+                    "role": "user",
+                    "content": "Rewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it."
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knc6Flf5kuSFKT4TPjlBWqILVzwJ",
+                "object": "chat.completion",
+                "created": 1699967966,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 368,
+                  "completion_tokens": 144,
+                  "total_tokens": 512
+                }
+              },
+              "start_time": 1699964366.112307,
+              "end_time": 1699964368.29981,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "WriteMail"
+        }
+      ],
+      "variant_id": "variant_1",
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 8.598377,
+        "total_tokens": 873
+      },
+      "result": {
+        "mail": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant."
+      },
+      "upload_metrics": false
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "ask",
+      "flow_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977",
+      "run_id": "6d517aee-8ae7-4976-b88e-b54e80105977_ask_0",
+      "status": "Completed",
+      "inputs": {
+        "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a clear and concise manner.\n\nuser:\n\n{{question}}\n",
+        "deployment_name": "gpt-35-turbo",
+        "question": "What's the distance between Earth and the Sun?"
+      },
+      "output": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977_0",
+      "start_time": "2023-11-14T13:19:00.776447Z",
+      "end_time": "2023-11-14T13:19:03.759885Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a clear and concise manner.\n\nuser:\n\n{{question}}\n",
+            "deployment_name": "gpt-35-turbo",
+            "question": "What's the distance between Earth and the Sun?"
+          },
+          "output": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+          "start_time": 1699964340.776447,
+          "end_time": 1699964343.759885,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistasnt that can answer questions. Answer the following question in a clear and concise manner."
+                  },
+                  {
+                    "role": "user",
+                    "content": "What's the distance between Earth and the Sun?\n"
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knbjy26qgS1dBZf3DvSkLaqdCOxX",
+                "object": "chat.completion",
+                "created": 1699967943,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU)."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 45,
+                  "completion_tokens": 34,
+                  "total_tokens": 79
+                }
+              },
+              "start_time": 1699964341.796323,
+              "end_time": 1699964343.759885,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "ask"
+        }
+      ],
+      "variant_id": "variant_0",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "prompt_tokens": 45,
+        "completion_tokens": 34,
+        "total_tokens": 79,
+        "duration": 2.983438
+      },
+      "result": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU)."
+    },
+    {
+      "node": "WriteMail",
+      "flow_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977",
+      "run_id": "6d517aee-8ae7-4976-b88e-b54e80105977_WriteMail_0",
+      "status": "Completed",
+      "inputs": {
+        "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+        "deployment_name": "gpt-35-turbo",
+        "text": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+        "stream": false
+      },
+      "output": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "6d517aee-8ae7-4976-b88e-b54e80105977_0",
+      "start_time": "2023-11-14T13:19:03.762399Z",
+      "end_time": "2023-11-14T13:19:05.220084Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+            "deployment_name": "gpt-35-turbo",
+            "text": "The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU).",
+            "stream": false
+          },
+          "output": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant",
+          "start_time": 1699964343.763407,
+          "end_time": 1699964345.21916,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistance which helps users writing professional mails."
+                  },
+                  {
+                    "role": "user",
+                    "content": "Rewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: The average distance between Earth and the Sun is approximately 93 million miles (149.6 million kilometers). This distance is also known as 1 astronomical unit (AU)."
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8KnbkgjQL1WK7DeKERDJY1bWPQ7HY",
+                "object": "chat.completion",
+                "created": 1699967944,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant"
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 87,
+                  "completion_tokens": 95,
+                  "total_tokens": 182
+                }
+              },
+              "start_time": 1699964343.764406,
+              "end_time": 1699964345.21916,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "WriteMail"
+        }
+      ],
+      "variant_id": "variant_0",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "prompt_tokens": 87,
+        "completion_tokens": 95,
+        "total_tokens": 182,
+        "duration": 1.457685
+      },
+      "result": "Dear Valued Reader,\n\nI am writing to provide you with information regarding the average distance between the Earth and Sun. It has been determined that this distance is approximately 93 million miles, which is equivalent to 149.6 million kilometers. Additionally, this measure is commonly referred to as 1 astronomical unit (AU).\n\nThank you for the opportunity to impart on this knowledge. Should you require any further assistance, please do not hesitate to contact me.\n\nSincerely,\n\nAI Assistant"
+    },
+    {
+      "node": "ask",
+      "flow_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178",
+      "run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178_ask_0",
+      "status": "Completed",
+      "inputs": {
+        "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a confusing and very long way.\n\nuser:\n\n{{question}}\n",
+        "deployment_name": "gpt-35-turbo",
+        "question": "What's the distance between Earth and the Sun?"
+      },
+      "output": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178_0",
+      "start_time": "2023-11-14T13:19:19.709424Z",
+      "end_time": "2023-11-14T13:19:26.108263Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistasnt that can answer questions. Answer the following question in a confusing and very long way.\n\nuser:\n\n{{question}}\n",
+            "deployment_name": "gpt-35-turbo",
+            "question": "What's the distance between Earth and the Sun?"
+          },
+          "output": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+          "start_time": 1699964359.709424,
+          "end_time": 1699964366.108263,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistasnt that can answer questions. Answer the following question in a confusing and very long way."
+                  },
+                  {
+                    "role": "user",
+                    "content": "What's the distance between Earth and the Sun?\n"
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knc1I1sULmFNdCdLNANbfTx0giuO",
+                "object": "chat.completion",
+                "created": 1699967961,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 46,
+                  "completion_tokens": 315,
+                  "total_tokens": 361
+                }
+              },
+              "start_time": 1699964359.793469,
+              "end_time": 1699964366.108263,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "ask"
+        }
+      ],
+      "variant_id": "variant_1",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "prompt_tokens": 46,
+        "completion_tokens": 315,
+        "total_tokens": 361,
+        "duration": 6.398839
+      },
+      "result": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it."
+    },
+    {
+      "node": "WriteMail",
+      "flow_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178",
+      "run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178_WriteMail_0",
+      "status": "Completed",
+      "inputs": {
+        "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+        "deployment_name": "gpt-35-turbo",
+        "text": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+        "stream": false
+      },
+      "output": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant.",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "0c9d4c86-37ed-4601-830c-c08e5aa85178_0",
+      "start_time": "2023-11-14T13:19:26.110189Z",
+      "end_time": "2023-11-14T13:19:28.301378Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "AzureOpenAI.chat",
+          "type": "Tool",
+          "inputs": {
+            "prompt": "{# Prompt is a jinja2 template that generates prompt for LLM #}\n\nsystem:\n\nYou are an assistance which helps users writing professional mails.\n\nuser:\n\nRewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: {{text}}",
+            "deployment_name": "gpt-35-turbo",
+            "text": "Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it.",
+            "stream": false
+          },
+          "output": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant.",
+          "start_time": 1699964366.111196,
+          "end_time": 1699964368.29981,
+          "error": null,
+          "children": [
+            {
+              "name": "openai.api_resources.chat_completion.ChatCompletion.create",
+              "type": "LLM",
+              "inputs": {
+                "api_base": "https://chatgpt-service.openai.azure.com/",
+                "api_type": "azure",
+                "api_version": "2023-07-01-preview",
+                "engine": "gpt-35-turbo",
+                "messages": [
+                  {
+                    "role": "system",
+                    "content": "You are an assistance which helps users writing professional mails."
+                  },
+                  {
+                    "role": "user",
+                    "content": "Rewrite the text below into a business mail. Use a professional tone, be clar and concise.\nSign the mail as AI Assistant.\n\nText: Ah, my dear inquirer, your question is a most fascinating inquiry - one that has perplexed some of the finest minds in the history of humankind. The distance you refer to is, of course, the one that exists between our beloved planet, Earth, and the magnificent celestial body that is the Sun. The sheer enormity of the distance in question is breathtaking, and to attempt to convey its magnitude in mere words seems almost futile. \n\nHowever, scientific research has established that the average distance of Earth from the Sun is approximately 93 million miles or 149.6 million kilometers. This value, known as an astronomical unit, or AU, has been calculated based on a number of highly complex mathematical models and astronomical observations. It is worth noting, however, that the distance between Earth and the Sun is not constant, but rather varies throughout the year due to the elliptical nature of the planet's orbit. \n\nTo truly grasp the significance of this distance, one must consider the sheer scale of the solar system in which we reside. The Sun, itself a colossal ball of hot plasma, represents over 99% of the total mass of our solar system. The Earth, by comparison, is a relatively small and insignificant planet orbiting around this mighty star in a seemingly endless expanse of darkness and emptiness. \n\nIn conclusion, my dear inquirer, the distance between Earth and the Sun is a truly magnificent and awe-inspiring thing. It is a reminder of the incredible vastness and complexity of the universe, and of our own small place within it."
+                  }
+                ],
+                "temperature": 1,
+                "top_p": 1,
+                "n": 1,
+                "stream": false,
+                "stop": null,
+                "max_tokens": null,
+                "presence_penalty": 0,
+                "frequency_penalty": 0,
+                "logit_bias": {},
+                "user": ""
+              },
+              "output": {
+                "id": "chatcmpl-8Knc6Flf5kuSFKT4TPjlBWqILVzwJ",
+                "object": "chat.completion",
+                "created": 1699967966,
+                "model": "gpt-35-turbo",
+                "prompt_filter_results": [
+                  {
+                    "prompt_index": 0,
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "choices": [
+                  {
+                    "index": 0,
+                    "finish_reason": "stop",
+                    "message": {
+                      "role": "assistant",
+                      "content": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant."
+                    },
+                    "content_filter_results": {
+                      "hate": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "self_harm": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "sexual": {
+                        "filtered": false,
+                        "severity": "safe"
+                      },
+                      "violence": {
+                        "filtered": false,
+                        "severity": "safe"
+                      }
+                    }
+                  }
+                ],
+                "usage": {
+                  "prompt_tokens": 368,
+                  "completion_tokens": 144,
+                  "total_tokens": 512
+                }
+              },
+              "start_time": 1699964366.112307,
+              "end_time": 1699964368.29981,
+              "error": null,
+              "children": null,
+              "node_name": null
+            }
+          ],
+          "node_name": "WriteMail"
+        }
+      ],
+      "variant_id": "variant_1",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "prompt_tokens": 368,
+        "completion_tokens": 144,
+        "total_tokens": 512,
+        "duration": 2.191189
+      },
+      "result": "Dear [Inquirer],\n\nThank you for your question regarding the distance between Earth and the Sun. The average distance between these celestial bodies is approximately 93 million miles or 149.6 million kilometers, known as an astronomical unit or AU. This value has been calculated based on complex mathematical models and astronomical observations. However, it is important to note that the distance between Earth and the Sun varies throughout the year due to the elliptical nature of Earth's orbit.\n\nOur solar system is an incredibly vast and complex structure, with the Sun representing over 99% of its mass. As an AI assistant, I hope this information provides a new perspective on the immense scale of the universe we inhabit.\n\nBest regards,\n\nAI Assistant."
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "text": "The US population in 2018"
+      },
+      "output": {
+        "result": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9",
+      "root_run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9",
+      "source_run_id": null,
+      "flow_id": "default_flow_id",
+      "start_time": "2023-11-14T14:52:13.700215Z",
+      "end_time": "2023-11-14T14:52:18.882319Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "my_python_tool",
+          "type": "Tool",
+          "inputs": {
+            "conn": "AzureOpenAIConnection",
+            "deployment_name": "gpt-35-turbo",
+            "input": "The US population in 2018"
+          },
+          "output": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant",
+          "start_time": 1699969933.702232,
+          "end_time": 1699969938.880313,
+          "error": null,
+          "children": null,
+          "node_name": "us_population_planner"
+        }
+      ],
+      "variant_id": "",
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "duration": 5.182104,
+        "total_tokens": 0
+      },
+      "result": {
+        "result": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant"
+      },
+      "upload_metrics": false
+    }
+  ],
+  "node_runs": [
+    {
+      "node": "us_population_planner",
+      "flow_run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9",
+      "run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9_us_population_planner_0",
+      "status": "Completed",
+      "inputs": {
+        "conn": "AzureOpenAIConnection",
+        "deployment_name": "gpt-35-turbo",
+        "input": "The US population in 2018"
+      },
+      "output": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant",
+      "metrics": null,
+      "error": null,
+      "parent_run_id": "0e51bfd1-c3f7-444a-a8c0-1df5324e3ca9_0",
+      "start_time": "2023-11-14T14:52:13.702232Z",
+      "end_time": "2023-11-14T14:52:18.880313Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "my_python_tool",
+          "type": "Tool",
+          "inputs": {
+            "conn": "AzureOpenAIConnection",
+            "deployment_name": "gpt-35-turbo",
+            "input": "The US population in 2018"
+          },
+          "output": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant",
+          "start_time": 1699969933.702232,
+          "end_time": 1699969938.880313,
+          "error": null,
+          "children": null,
+          "node_name": "us_population_planner"
+        }
+      ],
+      "variant_id": "",
+      "cached_run_id": null,
+      "cached_flow_run_id": null,
+      "logs": {
+        "stdout": "",
+        "stderr": ""
+      },
+      "system_metrics": {
+        "duration": 5.178081
+      },
+      "result": "Dear recipient,\n\nI hope this email finds you well. I am writing to provide you with an update on the US population in 2018. Based on the latest data available, the population number in the United States was 322,903,030.\n\nIf you require any further information or have any questions, please do not hesitate to let me know. I will be more than happy to follow up with you as soon as possible.\n\nThank you for your time and attention.\n\nBest regards,\n\nAI Assistant"
+    }
+  ]
+}

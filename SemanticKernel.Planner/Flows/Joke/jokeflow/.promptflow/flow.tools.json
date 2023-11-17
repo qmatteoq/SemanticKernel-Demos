@@ -1,0 +1,29 @@
+{
+  "package": {},
+  "code": {
+    "echo.py": {
+      "type": "python",
+      "inputs": {
+        "input": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "echo.py",
+      "function": "echo"
+    },
+    "joke.jinja2": {
+      "type": "llm",
+      "inputs": {
+        "topic": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "description": "Prompt is a jinja2 template that generates prompt for LLM",
+      "source": "joke.jinja2"
+    }
+  }
+}

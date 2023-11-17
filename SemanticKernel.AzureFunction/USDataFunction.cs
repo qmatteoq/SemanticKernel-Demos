@@ -41,6 +41,7 @@ namespace SemanticKernel.AzureFunction
             string message = $"The population number in the United States in {year} was {populationData.Population}";
 
             var response = req.CreateResponse(HttpStatusCode.OK);
+            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
             await response.WriteStringAsync(message);
 
             return response;

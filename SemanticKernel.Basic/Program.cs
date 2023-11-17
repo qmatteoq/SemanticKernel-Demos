@@ -13,13 +13,13 @@ string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
 
-var kernelBuilder = new KernelBuilder().
-    WithAzureChatCompletionService(deploymentName, endpoint, apiKey);
+var kernelBuilder = new KernelBuilder()
+    .WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
 
 var kernel = kernelBuilder.Build();
 
 string prompt = """
-Rewrite the text between triple backticks into a business mail. Use a professional tone, be clar and concise.
+Rewrite the text between triple backticks into a business mail. Use a professional tone, be clear and concise.
 Sign the mail as AI Assistant.
 
 Text: ```{{$input}}```

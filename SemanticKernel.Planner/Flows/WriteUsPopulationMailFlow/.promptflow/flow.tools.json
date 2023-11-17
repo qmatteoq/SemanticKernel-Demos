@@ -1,0 +1,27 @@
+{
+  "package": {},
+  "code": {
+    "us_population_planner.py": {
+      "type": "python",
+      "inputs": {
+        "conn": {
+          "type": [
+            "AzureOpenAIConnection"
+          ]
+        },
+        "deployment_name": {
+          "type": [
+            "string"
+          ]
+        },
+        "input": {
+          "type": [
+            "string"
+          ]
+        }
+      },
+      "source": "us_population_planner.py",
+      "function": "my_python_tool"
+    }
+  }
+}

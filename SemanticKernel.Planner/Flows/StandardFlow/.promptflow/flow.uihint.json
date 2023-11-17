@@ -1,0 +1,18 @@
+{
+  "nodes": {
+    "ask": {
+      "variant_0": {
+        "inputs": {
+          "question": []
+        }
+      }
+    },
+    "WriteMail": {
+      "variant_0": {
+        "inputs": {
+          "text": []
+        }
+      }
+    }
+  }
+}

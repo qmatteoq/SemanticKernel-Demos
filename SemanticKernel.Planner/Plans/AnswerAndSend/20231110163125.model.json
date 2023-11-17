@@ -1,0 +1,72 @@
+{
+    "plan": {
+        "state": [
+            {
+                "Key": "INPUT",
+                "Value": ""
+            }
+        ],
+        "steps": [
+            {
+                "state": [
+                    {
+                        "Key": "INPUT",
+                        "Value": ""
+                    }
+                ],
+                "steps": [],
+                "parameters": [
+                    {
+                        "Key": "INPUT",
+                        "Value": "Which is the distance between Earth and Sun?"
+                    }
+                ],
+                "outputs": [
+                    "ANSWER"
+                ],
+                "next_step_index": 0,
+                "name": "Ask",
+                "skill_name": "AskPlugin",
+                "description": "Provide an answer to a question",
+                "executed": false
+            },
+            {
+                "state": [
+                    {
+                        "Key": "INPUT",
+                        "Value": ""
+                    }
+                ],
+                "steps": [],
+                "parameters": [
+                    {
+                        "Key": "INPUT",
+                        "Value": "The distance between Earth and Sun is $ANSWER."
+                    }
+                ],
+                "outputs": [
+                    "RESULT__FINAL_MAIL"
+                ],
+                "next_step_index": 0,
+                "name": "WriteBusinessMail",
+                "skill_name": "MailPlugin",
+                "description": "Write a business mail",
+                "executed": false
+            }
+        ],
+        "parameters": [
+            {
+                "Key": "INPUT",
+                "Value": ""
+            }
+        ],
+        "outputs": [
+            "RESULT__FINAL_MAIL"
+        ],
+        "next_step_index": 0,
+        "name": "",
+        "skill_name": "Microsoft.SemanticKernel.Planning.Plan",
+        "description": "answer the question \"Which is the distance between Earth and Sun?\" and share it via mail",
+        "executed": false
+    }
+}

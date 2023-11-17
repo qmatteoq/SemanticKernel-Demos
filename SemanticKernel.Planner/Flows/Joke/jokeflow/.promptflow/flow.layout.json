@@ -1,0 +1,25 @@
+{
+  "nodeLayouts": {
+    "inputs": {
+      "x": 12,
+      "y": 62,
+      "index": -1
+    },
+    "outputs": {
+      "x": 12,
+      "y": 392,
+      "index": -1
+    },
+    "echo": {
+      "x": 12,
+      "y": 282,
+      "index": 0
+    },
+    "joke": {
+      "x": 12,
+      "y": 172,
+      "index": 1
+    }
+  },
+  "orientation": "Vertical"
+}

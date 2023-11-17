@@ -1,0 +1,30 @@
+{
+  "nodeLayouts": {
+    "inputs": {
+      "x": 12,
+      "y": 62,
+      "index": -1
+    },
+    "outputs": {
+      "x": 89.75,
+      "y": 431,
+      "index": -1
+    },
+    "echo": {
+      "x": 12,
+      "y": 282,
+      "index": -1
+    },
+    "ask": {
+      "x": 29.5,
+      "y": 184,
+      "index": 0
+    },
+    "WriteMail": {
+      "x": 35.25,
+      "y": 288,
+      "index": 1
+    }
+  },
+  "orientation": "Vertical"
+}

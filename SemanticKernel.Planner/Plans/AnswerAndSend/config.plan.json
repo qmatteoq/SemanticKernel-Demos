@@ -1,0 +1,26 @@
+{
+    "name": "AnswerAndSend",
+    "input": "",
+    "skills": [
+        {
+            "name": "AskPlugin",
+            "folder": "SemanticKernel.BuiltinPlugins\\Plugins",
+            "isSemantic": true,
+            "functions": [
+                {
+                    "label": "Ask"
+                }
+            ]
+        },
+        {
+            "name": "MailPlugin",
+            "folder": "SemanticKernel.Orchestration\\Plugins",
+            "isSemantic": true,
+            "functions": [
+                {
+                    "label": "WriteBusinessMail"
+                }
+            ]
+        }
+    ]
+}

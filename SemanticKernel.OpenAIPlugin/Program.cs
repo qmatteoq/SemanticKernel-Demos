@@ -3,6 +3,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Functions.OpenAPI.Extensions;
 using Microsoft.SemanticKernel.Functions.OpenAPI.Model;
+using Microsoft.SemanticKernel.Functions.OpenAPI.OpenAI;
 using Microsoft.SemanticKernel.Orchestration;
 
 var configuration = new ConfigurationBuilder()
@@ -15,12 +16,12 @@ string endpoint = configuration["AzureOpenAI:Endpoint"];
 
 var kernelBuilder = new KernelBuilder();
 kernelBuilder.
-    WithAzureChatCompletionService(deploymentName, endpoint, apiKey);
+    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
 
 var kernel = kernelBuilder.Build();
 
 const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+await kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
 
 var function = kernel.Functions.GetFunction("UnitedStatesPlugin", "GetPopulation");
 

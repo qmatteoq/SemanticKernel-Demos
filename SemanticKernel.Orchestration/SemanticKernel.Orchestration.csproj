@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>38200dae-db69-441e-b03a-86f740caac94</UserSecretsId>
@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta5" />
-    <PackageReference Include="Microsoft.SemanticKernel.Functions.OpenAPI" Version="1.0.0-beta5" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta8" />
+    <PackageReference Include="Microsoft.SemanticKernel.Functions.OpenAPI" Version="1.0.0-beta8" />
   </ItemGroup>
 
 </Project>

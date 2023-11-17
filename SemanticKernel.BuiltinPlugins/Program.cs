@@ -15,7 +15,7 @@ string bingKey = configuration["Bing:ApiKey"];
 
 var kernelBuilder = new KernelBuilder();
 kernelBuilder.
-    WithAzureChatCompletionService(deploymentName, endpoint, apiKey);
+    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
 
 var kernel = kernelBuilder.Build();
 
