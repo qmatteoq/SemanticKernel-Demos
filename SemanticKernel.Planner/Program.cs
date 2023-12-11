@@ -1,35 +1,51 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Functions.OpenAPI.Extensions;
-using Microsoft.SemanticKernel.Functions.OpenAPI.OpenAI;
-using Microsoft.SemanticKernel.Planners;
-
+using Microsoft.SemanticKernel.Planning;
+using Microsoft.SemanticKernel.Planning.Handlebars;
+using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("4ef9f3ca-be0f-43ef-9cb0-eac313050d99")
     .Build();
 
+
 string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
+string modelId = configuration["AzureOpenAI:ModelId"];
 
-var kernelBuilder = new KernelBuilder();
-kernelBuilder.
-    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
+string openAIApiKey = configuration["OpenAI:ApiKey"];
+string openAIModelId = configuration["OpenAI:Model"];
 
-var kernel = kernelBuilder.Build();
+var kernel = new KernelBuilder()
+    .AddOpenAIChatCompletion(openAIModelId, openAIApiKey)
+    .AddOpenAITextGeneration(openAIModelId, openAIApiKey)   
+    //.AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey)
+    //.AddAzureOpenAITextGeneration(deploymentName, modelId, endpoint, apiKey)
+    .Build();
 
-const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+
+kernel.ImportPluginFromType<UnitedStatesPlugin>();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "MailPlugin");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "//MailPlugin", "MailPlugin");
 
-var planner = new StepwisePlanner(kernel);
+#pragma warning disable SKEXP0061 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+//var planner = new HandlebarsPlanner(new HandlebarsPlannerConfig()
+//{
+//    AllowLoops = true
+//});
 
-var ask = "Write a mail to share the number of the United States population in 2015 for a research program.";
-var originalPlan = planner.CreatePlan(ask);
-var originalPlanResult = await kernel.RunAsync(originalPlan);
+var planner = new FunctionCallingStepwisePlanner();
 
-Console.WriteLine(originalPlanResult.GetValue<string>());
+string ask = "Write a mail to share the population of the United States in 2015";
+
+
+//var plan = await planner.CreatePlanAsync(kernel, ask);
+var result = await planner.ExecuteAsync(kernel, ask);
+//var result = plan.Invoke(kernel, new KernelArguments());
+
+Console.WriteLine(result);
 Console.ReadLine();
+
+#pragma warning restore SKEXP0061 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.

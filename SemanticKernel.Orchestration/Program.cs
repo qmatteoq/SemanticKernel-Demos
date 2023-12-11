@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Functions.OpenAPI.Extensions;
-using Microsoft.SemanticKernel.Functions.OpenAPI.OpenAI;
-using Microsoft.SemanticKernel.Orchestration;
+using Microsoft.SemanticKernel.AI.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.AI.OpenAI;
+using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("38200dae-db69-441e-b03a-86f740caac94")
@@ -11,32 +12,47 @@ var configuration = new ConfigurationBuilder()
 string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
+string modelId = configuration["AzureOpenAI:ModelId"];
 
-var kernelBuilder = new KernelBuilder();
-kernelBuilder.
-    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
+var kernel = new KernelBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey)
+    .Build();
 
-var kernel = kernelBuilder.Build();
+kernel.ImportPluginFromType<UnitedStatesPlugin>();
 
-const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "//MailPlugin", "MailPlugin");
 
-var pluginsDirectory = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Plugins");
-kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "MailPlugin");
 
-var mailFunction = kernel.Functions.GetFunction("MailPlugin", "WriteBusinessMail");
-var populationFunction = kernel.Functions.GetFunction("UnitedStatesPlugin", "GetPopulation");
-
-ContextVariables variables = new ContextVariables
+//manual function execution
+OpenAIPromptExecutionSettings settings = new()
 {
-    { "year", "2018" }
+    FunctionCallBehavior = FunctionCallBehavior.EnableKernelFunctions
 };
 
-var result = await kernel.RunAsync(
-    variables,
-    populationFunction,
-    mailFunction
-);
+var chatHistory = new ChatHistory();
+chatHistory.AddUserMessage("Write a paragraph to share the population of the United States in 2015. Then add also, among the population, how many people identified themselves as male.");
 
-Console.WriteLine(result.GetValue<string>());
+var chatCompletionService = kernel.Services.GetService<IChatCompletionService>();
+var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+
+//as long as the content is null, it means that the chat completion service is waiting for a function call to be processed
+while (result.Content == null)
+{
+    var functionCall = ((OpenAIChatMessageContent)result).GetOpenAIFunctionResponse();
+    if (functionCall != null)
+    {
+        KernelFunction pluginFunction;
+        KernelArguments arguments;
+        kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
+        var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
+        Console.WriteLine(functionResult.GetValue<string>());
+        chatHistory.AddFunctionMessage(functionResult.GetValue<string>(), functionResult.Function.Name);
+
+        result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+    }
+}
+
+
+Console.WriteLine(result.Content);
 Console.ReadLine();

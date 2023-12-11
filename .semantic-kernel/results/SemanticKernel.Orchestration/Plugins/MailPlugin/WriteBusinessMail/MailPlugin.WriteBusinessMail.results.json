@@ -13,6 +13,40 @@
                 "endpoint": null,
                 "useCustomEndpoint": false,
                 "endpointType": "chat-completion",
+                "modelId": "gpt-4",
+                "chatSystemMessage": "You are an AI assistant that helps people find information."
+            },
+            "requestSettings": {
+                "temperature": 0,
+                "topP": 0,
+                "presencePenalty": 0,
+                "frequencyPenalty": 0,
+                "maxTokens": 500,
+                "stopSequences": []
+            },
+            "variables": [
+                {
+                    "key": "input",
+                    "value": "Tell David I'll be out of office tomorrow"
+                }
+            ],
+            "output": {
+                "prompt": "Rewrite the text between triple backticks into a business mail. Use a professional tone, be clar and concise.\r\nSign the mail as AI Assistant.\r\n\r\nText: ```Tell David I'll be out of office tomorrow```",
+                "durationInMilliseconds": 5565.0997,
+                "inputTokens": 43,
+                "outputTokens": 79,
+                "result": "Subject: Notification of Absence\n\nDear David,\n\nI hope this message finds you well. I am writing to inform you that I will not be present in the office tomorrow due to personal commitments. \n\nShould you need any assistance during my absence, please feel free to reach out. I will ensure to address any pending matters upon my return.\n\nThank you for your understanding.\n\nBest Regards,\n\nAI Assistant",
+                "chatCompletionResult": "Subject: Notification of Absence\n\nDear David,\n\nI hope this message finds you well. I am writing to inform you that I will not be present in the office tomorrow due to personal commitments. \n\nShould you need any assistance during my absence, please feel free to reach out. I will ensure to address any pending matters upon my return.\n\nThank you for your understanding.\n\nBest Regards,\n\nAI Assistant"
+            }
+        },
+        {
+            "completionConfig": {
+                "label": "gpt-4",
+                "aiService": "OpenAI",
+                "deploymentOrModelId": "gpt-4",
+                "endpoint": null,
+                "useCustomEndpoint": false,
+                "endpointType": "chat-completion",
                 "chatSystemMessage": "You are an AI assistant that helps people find information."
             },
             "requestSettings": {

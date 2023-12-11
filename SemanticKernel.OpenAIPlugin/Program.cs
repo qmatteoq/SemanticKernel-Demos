@@ -1,10 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.OpenApi.Models;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Functions.OpenAPI.Extensions;
-using Microsoft.SemanticKernel.Functions.OpenAPI.Model;
-using Microsoft.SemanticKernel.Functions.OpenAPI.OpenAI;
-using Microsoft.SemanticKernel.Orchestration;
+using Microsoft.SemanticKernel.Services.
+
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("d6a28a11-60a1-48f7-b334-15064483b85b")
@@ -13,15 +10,15 @@ var configuration = new ConfigurationBuilder()
 string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
+string modelId = configuration["AzureOpenAI:ModelId"];
 
-var kernelBuilder = new KernelBuilder();
-kernelBuilder.
-    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
-
-var kernel = kernelBuilder.Build();
+var kernel = new KernelBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey)
+    .Build();
 
 const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+await kerne kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+
 
 var function = kernel.Functions.GetFunction("UnitedStatesPlugin", "GetPopulation");
 

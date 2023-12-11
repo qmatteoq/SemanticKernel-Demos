@@ -1,0 +1,5 @@
+﻿Question to Kernel Memory: {{$input}}
+
+Kernel Memory Answer: {{memory.ask $input}}
+
+If the answer is empty say 'I don't know' otherwise reply with a preview of the answer, truncated to 15 words.

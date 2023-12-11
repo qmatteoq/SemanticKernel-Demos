@@ -12,8 +12,17 @@
   "input": {
     "parameters": [
       {
-        "name": "input",
+        "name": "text",
         "description": "The text to convert into a business mail.",
+        "defaultValue": ""
+      }
+    ]
+  },
+ "output": {
+    "parameters": [
+      {
+        "name": "output",
+        "description": "The generated business mail.",
         "defaultValue": ""
       }
     ]
