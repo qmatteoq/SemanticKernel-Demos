@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Services.
-
+using Microsoft.SemanticKernel.Plugins.OpenApi.Model;
+using Microsoft.SemanticKernel.Plugins.OpenApi.OpenAI;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("d6a28a11-60a1-48f7-b334-15064483b85b")
@@ -17,20 +17,16 @@ var kernel = new KernelBuilder()
     .Build();
 
 const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kerne kernel.ImportOpenAIPluginFunctionsAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
+await kernel.ImportPluginFromOpenAIAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
 
+var function = kernel.Plugins.GetFunction("UnitedStatesPlugin", "GetPopulation");
 
-var function = kernel.Functions.GetFunction("UnitedStatesPlugin", "GetPopulation");
-
-ContextVariables variables = new ContextVariables
+KernelArguments variables = new KernelArguments
 {
     { "year", "2020" }
 };
 
-var result = await kernel.RunAsync(
-    variables,
-    function
-);
+var result = await kernel.InvokeAsync(function, variables);
 
 Console.WriteLine(result.GetValue<RestApiOperationResponse>().Content);
 Console.ReadLine();

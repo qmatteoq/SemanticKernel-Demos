@@ -8,7 +8,11 @@
     <UserSecretsId>4ef9f3ca-be0f-43ef-9cb0-eac313050d99</UserSecretsId>
   </PropertyGroup>
 
+
   <ItemGroup>
+    <Content Include="Plugins\MailPluginYaml\WriteBusinessMail.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Plugins\MailPlugin\WriteBusinessMail\config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,0 +1,11 @@
+﻿name: WriteBusinessMail
+template: |
+  Rewrite the text between triple backticks into a business mail. Use a professional tone, be clar and concise. Sign the mail as AI Assistant. Text: ```{{$input}}```.
+template_format: semantic-kernel
+description: A function that generates a business mail.
+input_variables:
+  - name: text
+    description: The text to be rewritten into a business mail.
+    is_required: true
+output_variable:
+  description: The generated business mail.

@@ -9,22 +9,12 @@
     "presence_penalty": 0.0,
     "frequency_penalty": 0.0
   },
-  "input": {
-    "parameters": [
-      {
-        "name": "text",
-        "description": "The text to convert into a business mail.",
-        "defaultValue": ""
-      }
-    ]
-  },
- "output": {
-    "parameters": [
-      {
-        "name": "output",
-        "description": "The generated business mail.",
-        "defaultValue": ""
-      }
-    ]
-  }
+  "input_variables": [
+    {
+      "name": "input",
+      "description": "The text to convert into a business mail.",
+      "required": true,
+      "default": ""
+    }
+  ]
 }
