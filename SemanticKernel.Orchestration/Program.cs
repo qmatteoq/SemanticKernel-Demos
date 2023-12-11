@@ -15,14 +15,13 @@ string endpoint = configuration["AzureOpenAI:Endpoint"];
 string modelId = configuration["AzureOpenAI:ModelId"];
 
 var kernel = new KernelBuilder()
-    .AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey)
+    .AddAzureOpenAIChatCompletion("gpt-4", "gpt-4", endpoint, apiKey)
     .Build();
 
 kernel.ImportPluginFromType<UnitedStatesPlugin>();
 
-var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "//MailPlugin", "MailPlugin");
-
+var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
 //manual function execution
 OpenAIPromptExecutionSettings settings = new()
@@ -31,26 +30,24 @@ OpenAIPromptExecutionSettings settings = new()
 };
 
 var chatHistory = new ChatHistory();
-chatHistory.AddUserMessage("Write a paragraph to share the population of the United States in 2015. Then add also, among the population, how many people identified themselves as male.");
+chatHistory.AddUserMessage("Write a business mail to share the population of the United States in 2015. Then add also, among the population, how many people identified themselves as male.");
 
 var chatCompletionService = kernel.Services.GetService<IChatCompletionService>();
 var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
 
 //as long as the content is null, it means that the chat completion service is waiting for a function call to be processed
-while (result.Content == null)
+var functionCall = ((OpenAIChatMessageContent)result).GetOpenAIFunctionResponse();
+while (functionCall != null)
 {
-    var functionCall = ((OpenAIChatMessageContent)result).GetOpenAIFunctionResponse();
-    if (functionCall != null)
-    {
-        KernelFunction pluginFunction;
-        KernelArguments arguments;
-        kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
-        var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-        Console.WriteLine(functionResult.GetValue<string>());
-        chatHistory.AddFunctionMessage(functionResult.GetValue<string>(), functionResult.Function.Name);
+    KernelFunction pluginFunction;
+    KernelArguments arguments;
+    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
+    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
+    Console.WriteLine(functionResult.GetValue<string>());
+    chatHistory.AddFunctionMessage(functionResult.GetValue<string>(), functionResult.Function.Name);
 
-        result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-    }
+    result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+    functionCall = ((OpenAIChatMessageContent)result).GetOpenAIFunctionResponse();
 }
 
 
