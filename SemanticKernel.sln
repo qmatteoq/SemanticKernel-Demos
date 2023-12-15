@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Basic", "SemanticKernel.Basic\SemanticKernel.Basic.csproj", "{C29F9306-A63B-450B-A141-2118A2D2FA10}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.SemanticFunction", "SemanticKernel.SemanticFunction\SemanticKernel.SemanticFunction.csproj", "{6BECCC01-8114-40C6-8A51-B3F58D87B3C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.PromptFunction", "SemanticKernel.SemanticFunction\SemanticKernel.PromptFunction.csproj", "{6BECCC01-8114-40C6-8A51-B3F58D87B3C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.NativeFunction", "SemanticKernel.NativeFunction\SemanticKernel.NativeFunction.csproj", "{BC7424FF-A0A7-4641-BCCB-6FC07C40CACB}"
 EndProject
@@ -15,13 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.AzureFunctio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Orchestration", "SemanticKernel.Orchestration\SemanticKernel.Orchestration.csproj", "{11DEC263-5F26-4D5E-A683-B27B39D84D8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Planner", "SemanticKernel.Planner\SemanticKernel.Planner.csproj", "{AA2564B2-6D63-43DD-B622-A744A3B6673D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.HandlebarsPlanner", "SemanticKernel.Planner\SemanticKernel.HandlebarsPlanner.csproj", "{AA2564B2-6D63-43DD-B622-A744A3B6673D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.BuiltinPlugins", "SemanticKernel.BuiltinPlugins\SemanticKernel.BuiltinPlugins.csproj", "{CCBA55D1-02E6-42BA-AB83-62294B7C9972}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Memory", "SemanticKernel.Memory\SemanticKernel.Memory.csproj", "{C4D20CFF-FD54-4B56-B967-9ED28B22D6D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.Plugins", "SemanticKernel.Plugins\SemanticKernel.Plugins.csproj", "{4DBC630F-B460-4D0F-A212-02BA8C29274D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Plugins", "SemanticKernel.Plugins\SemanticKernel.Plugins.csproj", "{4DBC630F-B460-4D0F-A212-02BA8C29274D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.FunctionStepwisePlanner", "SemanticKernel.FunctionStepwisePlanner\SemanticKernel.FunctionStepwisePlanner.csproj", "{944876AE-37FB-40AB-BBB6-C7D875EB4ABC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{4DBC630F-B460-4D0F-A212-02BA8C29274D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DBC630F-B460-4D0F-A212-02BA8C29274D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DBC630F-B460-4D0F-A212-02BA8C29274D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{944876AE-37FB-40AB-BBB6-C7D875EB4ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944876AE-37FB-40AB-BBB6-C7D875EB4ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944876AE-37FB-40AB-BBB6-C7D875EB4ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944876AE-37FB-40AB-BBB6-C7D875EB4ABC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

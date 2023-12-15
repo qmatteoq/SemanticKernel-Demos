@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Planning.Handlebars;
-using Microsoft.SemanticKernel.Plugins.OpenApi;
 using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
 
 var configuration = new ConfigurationBuilder()
@@ -22,7 +21,6 @@ var kernel = Kernel.CreateBuilder()
 //await kernel.ImportPluginFromOpenAIAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
 
 kernel.ImportPluginFromType<UnitedStatesPlugin>();
-
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
 kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
