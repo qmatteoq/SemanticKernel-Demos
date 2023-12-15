@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.AI.OpenAI;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 
 var configuration = new ConfigurationBuilder()
@@ -10,12 +10,10 @@ var configuration = new ConfigurationBuilder()
 string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
-string modelId = configuration["AzureOpenAI:ModelId"];
 
-var kernelBuilder = new KernelBuilder()
-    .AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey);
-
-var kernel = kernelBuilder.Build();
+var kernel = Kernel.CreateBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
+    .Build();
 
 string prompt = """
 Rewrite the text between triple backticks into a business mail. Use a professional tone, be clear and concise.
@@ -36,11 +34,20 @@ KernelArguments arguments = new KernelArguments
 };
 
 
-//var output = await kernel.InvokeAsync(mailFunction, arguments);
+var output = await kernel.InvokeAsync(mailFunction, arguments);
 
-var output = await kernel.InvokePromptAsync(prompt, arguments: new() {
-    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
-});
+//var output = await kernel.InvokePromptAsync(prompt, arguments: new() {
+//    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
+//});
+//var output = kernel.InvokePromptStreamingAsync(prompt, arguments: new()
+//{
+//    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
+//});
+
+//await foreach (var item in output)
+//{
+//    Console.Write(item.InnerContent);
+//}
 
 Console.WriteLine(output.GetValue<string>());
 Console.ReadLine();

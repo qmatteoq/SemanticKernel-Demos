@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>5b68dc4b-5ae4-44c4-a65b-6ae334716c74</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,8 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta8" />
-    <PackageReference Include="Microsoft.SemanticKernel.Plugins.Web" Version="1.0.0-beta8" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-rc3" />
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.Web" Version="1.0.0-rc3" />
   </ItemGroup>
 
 </Project>

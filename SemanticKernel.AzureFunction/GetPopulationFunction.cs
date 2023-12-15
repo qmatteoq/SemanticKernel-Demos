@@ -1,25 +1,21 @@
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SemanticKernel.AzureFunction.Models;
 using UnitedStatesDataFunction.Models;
 
 namespace SemanticKernel.AzureFunction
 {
-    public class USDataFunction
+    public class GetPopulationFunction
     {
-        private readonly ILogger<USDataFunction> _logger;
+        private readonly ILogger<GetPopulationFunction> _logger;
 
-        public USDataFunction(ILogger<USDataFunction> log)
+        public GetPopulationFunction(ILogger<GetPopulationFunction> log)
         {
             _logger = log;
         }
@@ -27,7 +23,7 @@ namespace SemanticKernel.AzureFunction
         [Function("GetPopulation")]
         [OpenApiOperation(operationId: "GetPopulation", tags: new[] { "year" }, Description = "Get the United States population for a specific year")]
         [OpenApiParameter(name: "year", In = ParameterLocation.Query, Required = true, Type = typeof(string), Description = "The year")]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "text/plain", bodyType: typeof(string), Description = "The population number")]
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UnitedStatesResponse), Description = "The population number")]
         public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequestData req, [FromQuery] string year)
         {
@@ -38,11 +34,15 @@ namespace SemanticKernel.AzureFunction
             var result = await client.GetFromJsonAsync<UnitedStatesResult>(request);
             var populationData = result.data.FirstOrDefault(x => x.Year == year);
 
-            string message = $"The population number in the United States in {year} was {populationData.Population}";
+            var jsonResponse = new UnitedStatesResponse
+            {
+                Gender = null,
+                TotalNumber = populationData.Population,
+                Year = year
+            };
 
             var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
-            await response.WriteStringAsync(message);
+            await response.WriteAsJsonAsync(jsonResponse);
 
             return response;
         }

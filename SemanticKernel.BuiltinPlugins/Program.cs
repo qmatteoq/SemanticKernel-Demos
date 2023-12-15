@@ -2,34 +2,40 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Plugins.Web.Bing;
 using Microsoft.SemanticKernel.Plugins.Web;
-using Microsoft.SemanticKernel.Planners;
+using Microsoft.SemanticKernel.Connectors.AI.OpenAI;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("e3d5349a-9eb9-45db-821b-03e4d2c37173")
+    .AddUserSecrets("5b68dc4b-5ae4-44c4-a65b-6ae334716c74")
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentName = configuration["AzureOpenAI:DeploymentName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
-string bingKey = configuration["Bing:ApiKey"];
+string modelId = configuration["AzureOpenAI:ModelId"];
+string bingKey  = configuration["Bing:ApiKey"];
 
-var kernelBuilder = new KernelBuilder();
-kernelBuilder.
-    WithAzureOpenAIChatCompletionService(deploymentName, endpoint, apiKey);
+var kernel = new KernelBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentName, modelId, endpoint, apiKey)
+    .Build();
 
-var kernel = kernelBuilder.Build();
 
+#pragma warning disable SKEXP0054 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var bingConnector = new BingConnector(bingKey);
-kernel.ImportFunctions(new WebSearchEnginePlugin(bingConnector), "BingPlugin");
+var plugin = new WebSearchEnginePlugin(bingConnector);
+//kernel.ImportPluginFromObject(plugin, "BingPlugin");
 
-var pluginsDirectory = Path.Combine(System.IO.Directory.GetCurrentDirectory(), "Plugins");
-kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "AskPlugin");
+OpenAIPromptExecutionSettings settings = new()
+{
+    FunctionCallBehavior = FunctionCallBehavior.AutoInvokeKernelFunctions
+};
 
-var planner = new StepwisePlanner(kernel);
+var results = kernel.InvokePromptStreamingAsync("Which is the latest version of Semantic Kernel from Microsoft?", new KernelArguments(settings));
+await foreach (var result in results)
+{
+    Console.Write(result.InnerContent);
+}   
 
-var ask = "Who is the prime minister of UK?";
-var originalPlan = planner.CreatePlan(ask);
-var originalPlanResult = await kernel.RunAsync(originalPlan);
-
-Console.WriteLine(originalPlanResult.GetValue<string>());
+Console.WriteLine();
 Console.ReadLine();
+
+#pragma warning restore SKEXP0054 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.

@@ -3,7 +3,6 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Planning.Handlebars;
 using Microsoft.SemanticKernel.Plugins.OpenApi.OpenAI;
 
-
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("4ef9f3ca-be0f-43ef-9cb0-eac313050d99")
     .Build();
