@@ -10,7 +10,7 @@ namespace SemanticKernel.Plugins.Models
     public class UnitedStatesResponse
     {
         [JsonPropertyName("year")]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [JsonPropertyName("totalNumber")]
         public int TotalNumber { get; set; }
