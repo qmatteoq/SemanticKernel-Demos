@@ -36,7 +36,6 @@ chatHistory.AddMessage(AuthorRole.User, prompt);
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
 
-//as long as the content is null, it means that the chat completion service is waiting for a function call to be processed
 var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
 foreach (var functionCall in functionCalls)
 {
@@ -44,7 +43,7 @@ foreach (var functionCall in functionCalls)
     KernelArguments arguments;
     kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
     var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-    var jsonResponse = functionResult.GetValue<UnitedStatesResponse>();
+    var jsonResponse = functionResult.GetValue<object>();
     var json = JsonSerializer.Serialize(jsonResponse);
     Console.WriteLine(json);
     chatHistory.AddMessage(AuthorRole.Tool, json);
