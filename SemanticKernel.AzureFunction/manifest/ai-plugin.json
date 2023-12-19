@@ -1,9 +1,9 @@
 {
-  "schemaVersion": "v1",
-  "nameForModel": "UnitedStatesPlugin",
-  "nameForHuman": "United States Plugin",
-  "descriptionForModel": "Used to get the population of the United States in a specific year.",
-  "descriptionForHuman": "Used to get the population of the United States in a specific year.",
+  "schema_version": "v1",
+  "name_for_human": "United States population Plugin",
+  "name_for_model": "UnitedStatesPlugin",
+  "description_for_human": "Get the population of the United States in a specific year.",
+  "description_for_model": "Help the user getting the population of the United States in a specific year.",
   "auth": {
     "type": "none"
   },
@@ -11,7 +11,7 @@
     "type": "openapi",
     "url": "{url}/api/swagger.json"
   },
-  "logoUrl": "{url}/logo.png",
-  "contactEmail": "support@example.com",
-  "legalInfoUrl": "http://www.example.com/legal"
+  "logo_url": "{url}/logo.png",
+  "contact_email": "info@developerscantina.com",
+  "legal_info_url": "http://www.developerscantina.com"
 }
