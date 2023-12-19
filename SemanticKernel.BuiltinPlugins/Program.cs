@@ -3,7 +3,6 @@ using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Plugins.Web.Bing;
 using Microsoft.SemanticKernel.Plugins.Web;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-using Microsoft.SemanticKernel.ChatCompletion;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("5b68dc4b-5ae4-44c4-a65b-6ae334716c74")
@@ -28,16 +27,10 @@ OpenAIPromptExecutionSettings settings = new()
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };
 
-var chatHistory = new ChatHistory();
-chatHistory.AddMessage(AuthorRole.User, "Which is the latest version of Semantic Kernel from Microsoft?");
-
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-var results = chatCompletionService.GetStreamingChatMessageContentsAsync(chatHistory, settings, kernel);
-
-//var results = kernel.InvokePromptStreamingAsync("Which is the latest version of Semantic Kernel from Microsoft?", new KernelArguments(settings));
-await foreach (var result in results)
+var results = kernel.InvokePromptStreamingAsync("What is Semantic Kernel from Microsoft?", new KernelArguments(settings));
+await foreach (var message in results)
 {
-    Console.Write(result.Content);
+    Console.Write(message);
 }   
 
 Console.WriteLine();

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.OpenAIPlugin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.AzureFunction", "SemanticKernel.AzureFunction\SemanticKernel.AzureFunction.csproj", "{78C16C65-E443-4327-90FA-D953C12C8492}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Orchestration", "SemanticKernel.Orchestration\SemanticKernel.Orchestration.csproj", "{11DEC263-5F26-4D5E-A683-B27B39D84D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.FunctionCalling", "SemanticKernel.Orchestration\SemanticKernel.FunctionCalling.csproj", "{11DEC263-5F26-4D5E-A683-B27B39D84D8A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.HandlebarsPlanner", "SemanticKernel.Planner\SemanticKernel.HandlebarsPlanner.csproj", "{AA2564B2-6D63-43DD-B622-A744A3B6673D}"
 EndProject

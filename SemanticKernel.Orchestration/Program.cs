@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
@@ -20,9 +19,6 @@ var kernel = Kernel.CreateBuilder()
     .Build();
 
 kernel.ImportPluginFromType<UnitedStatesPlugin>();
-
-var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
-kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
 //manual function execution
 OpenAIPromptExecutionSettings settings = new()
@@ -56,16 +52,19 @@ foreach (var functionCall in functionCalls)
 
 result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
 
+Console.WriteLine(result.Content);
+
+// automatic function calling
+
+//OpenAIPromptExecutionSettings settings = new()
+//{
+//    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+//};
 
 //var streamingResult = kernel.InvokePromptStreamingAsync(prompt, new KernelArguments(settings));
 //await foreach (var streamingResponse in streamingResult)
 //{
-//    Console.Write(streamingResponse.InnerContent);
+//    Console.Write(streamingResponse);
 //}
 
-Console.WriteLine(result.Content);
-
-//var result = await kernel.InvokePromptAsync(prompt, new KernelArguments(settings));
-
-//Console.WriteLine(result.GetValue<string>());
 Console.ReadLine();

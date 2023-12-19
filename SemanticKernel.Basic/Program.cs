@@ -2,7 +2,6 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
-
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("8a4821ee-3680-41af-8b37-1b9a978ac962")
     .Build();
@@ -34,20 +33,25 @@ KernelArguments arguments = new KernelArguments
 };
 
 
-var output = await kernel.InvokeAsync(mailFunction, arguments);
+//standard function invocation
+var response = await kernel.InvokeAsync(mailFunction, arguments);
+Console.WriteLine(response.GetValue<string>());
 
-//var output = await kernel.InvokePromptAsync(prompt, arguments: new() {
+//prompt function invocation
+//var response = await kernel.InvokePromptAsync(prompt, arguments: new() {
 //    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
 //});
-//var output = kernel.InvokePromptStreamingAsync(prompt, arguments: new()
+//Console.WriteLine(response.GetValue<string>());
+
+//prompt streaming invocation
+//var response = kernel.InvokePromptStreamingAsync(prompt, arguments: new()
 //{
 //    { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
 //});
 
-//await foreach (var item in output)
+//await foreach (var message in response)
 //{
-//    Console.Write(item.InnerContent);
+//    Console.Write(message);
 //}
 
-Console.WriteLine(output.GetValue<string>());
 Console.ReadLine();

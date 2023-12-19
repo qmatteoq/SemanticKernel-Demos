@@ -24,7 +24,9 @@ kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 #pragma warning disable SKEXP0061 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var planner = new FunctionCallingStepwisePlanner();
 
-var ask = "Write a mail to share the number of the United States population in 2015 for a research program.";
+var ask = @"Write a business mail to share the population of the United States in 2015. 
+Make sure to specify how many people, among the population, identify themselves as male and female.
+Don't share approximations, please share the exact numbers.";
 
 var result = await planner.ExecuteAsync(kernel, ask);
 

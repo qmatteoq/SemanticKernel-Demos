@@ -14,28 +14,25 @@ var kernel = Kernel.CreateBuilder()
     .Build();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-//kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
-var writeMailYaml = File.ReadAllText($"{pluginsDirectory}\\MailPluginYaml\\WriteBusinessMail.yaml");
-var function = kernel.CreateFunctionFromPromptYaml(writeMailYaml);
+//use classic approach
 
-var plugin = KernelPluginFactory.CreateFromFunctions("MailPlugin", new[] { function });
-kernel.Plugins.Add(plugin);
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
+var function = kernel.Plugins.GetFunction("MailPlugin", "WriteBusinessMail");
 
-//OpenAIPromptExecutionSettings settings = new()
-//{
-//    FunctionCallBehavior = FunctionCallBehavior.AutoInvokeKernelFunctions
-//};
+//use yaml approach
 
-var functionToCall = kernel.Plugins.GetFunction("MailPlugin", "WriteBusinessMail");
+//var writeMailYaml = File.ReadAllText($"{pluginsDirectory}\\MailPluginYaml\\WriteBusinessMail.yaml");
+//var function = kernel.CreateFunctionFromPromptYaml(writeMailYaml);
+//var plugin = KernelPluginFactory.CreateFromFunctions("MailPlugin", new[] { function });
+//kernel.Plugins.Add(plugin);
 
 KernelArguments variables = new KernelArguments()
 {
     { "input", "Tell David that I'm going to finish the business plan by the end of the week." }
 };
 
-var result = await kernel.InvokeAsync(functionToCall, variables);
-//var result = await kernel.InvokePromptAsync("Write a business mail about the following topic: {{$input}}", variables);
+var result = await kernel.InvokeAsync(function, variables);
 
 Console.WriteLine(result.GetValue<string>());
 Console.ReadLine();

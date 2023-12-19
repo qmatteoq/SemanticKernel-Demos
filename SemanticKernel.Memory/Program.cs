@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.KernelMemory;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Planners;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("2d112f3a-9cf4-4b55-931e-474661e9d70d")
@@ -35,26 +35,40 @@ var chatConfig = new AzureOpenAIConfig
 
 var kernelMemory = new KernelMemoryBuilder()
     .WithAzureOpenAITextGeneration(chatConfig)
-    .WithAzureOpenAIEmbeddingGeneration(embeddingConfig)
+    .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
     .WithAzureAISearch(searchEndpoint, searchApiKey)
     .Build();
 
-var kernel = new KernelBuilder()
-    .WithAzureOpenAIChatCompletionService(deploymentChatName, endpoint, apiKey)
+var kernel = Kernel.CreateBuilder()
+    .AddAzureOpenAIChatCompletion(deploymentChatName, endpoint, apiKey)
     .Build();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
 
-kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "MailPlugin");
-kernel.ImportSemanticFunctionsFromDirectory(pluginsDirectory, "AskPlugin");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "\\MailPlugin", "MailPlugin");
 
-kernel.ImportFunctions(new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true), "memory");
+var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
+kernel.ImportPluginFromObject(plugin, "memory");
 
-var planner = new ActionPlanner(kernel);
+var prompt = @"
+            Question to Kernel Memory: {{$input}}
 
-var ask = @"Answer the question 'What is Contoso Electronics? Use your memories to find the answer, then use it to share the information via mail";
-var originalPlan = await planner.CreatePlanAsync(ask);
-var originalPlanResult = await kernel.RunAsync(originalPlan);
+            Kernel Memory Answer: {{memory.ask $input}}
 
-Console.WriteLine(originalPlanResult.GetValue<string>());
+            If the answer is empty say 'I don't know' otherwise reply with a business mail to share the answer.
+            ";
+
+OpenAIPromptExecutionSettings settings = new()
+{
+    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+};
+
+KernelArguments arguments = new KernelArguments(settings)
+{
+    { "input", "What is Contoso Electronics?" },
+};
+
+var response = await kernel.InvokePromptAsync(prompt, arguments);
+
+Console.WriteLine(response.GetValue<string>());
 Console.ReadLine();
