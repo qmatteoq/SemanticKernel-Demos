@@ -1,0 +1,83 @@
+﻿@page "/addcontent"
+@inject IMemoryService MemoryService
+@rendermode InteractiveServer
+
+<h1>Add Content</h1>
+
+<h3>Store text</h3>
+<div>
+    <textarea @bind="Content" style="width: 100%; height: 200px;" />
+</div>
+<div>
+    <button class="btn btn-primary" @onclick="StoreText">Add text</button>
+</div>
+
+<h3>Store file</h3>
+<div>
+    <InputFile OnChange="@LoadFiles" />
+</div>
+<div>
+    @Output
+</div>
+
+<h3>Store web page</h3>
+<div>
+    Web page
+</div>
+<div>
+    <input type="text" @bind="Url" />
+</div>
+<div>
+    <button class="btn btn-primary" @onclick="StoreUrl">Add web page</button>
+</div>
+
+@code {
+    private string Content;
+    private string Output;
+    private string Url;
+
+    private async Task StoreText()
+    {
+        Output = "Loading...";
+        bool success = await MemoryService.StoreText(Content);
+        if (success)
+        {
+            Output = "The text has been stored succesfully";
+            Content = string.Empty;
+        }
+        else
+        {
+            Output = "The text could not be stored";
+        }
+    }
+
+    private async Task LoadFiles(InputFileChangeEventArgs e)
+    {
+        Output = "Saving file in progress...";
+        var stream = e.File.OpenReadStream();
+        var path = Path.Combine($"{Directory.GetCurrentDirectory()}//Documents", e.File.Name);
+
+        using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+        {
+            await stream.CopyToAsync(fileStream);
+        }
+
+        await MemoryService.StoreFile(path, e.File.Name);
+        Output = "File stored succesfully";
+    }
+
+    private async Task StoreUrl()
+    {
+        Output = "Loading...";
+        bool success = await MemoryService.StoreWebsite(Url);
+        if (success)
+        {
+            Output = "The url has been stored succesfully";
+            Url = string.Empty;
+        }
+        else
+        {
+            Output = "The url could not be stored";
+        }
+    }
+}

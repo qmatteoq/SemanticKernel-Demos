@@ -1,0 +1,45 @@
+﻿@page "/askquestion"
+@using System.Text.RegularExpressions
+@using System.Web
+@using KernelMemory.Models
+@inject IMemoryService AIService
+@rendermode InteractiveServer
+
+<h1>Ask question</h1>
+
+<p>
+    Type your question:
+</p>
+<p>
+    <input @bind="question" style="width: 100%;" />
+</p>
+<p>
+    <button class="btn btn-primary" @onclick="Ask">Ask</button>
+</p>
+
+<p>
+    @if (answer != null)
+    {
+        <strong>The answer is:</strong> @answer.Answer
+        @foreach (var citation in answer.Citations)
+        {
+            <ul>
+
+                <li><strong>File name:</strong> @citation.SourceName</li>
+                <li><strong>File type:</strong>@citation.SourceContentType</li>
+            </ul>
+        }
+    }
+
+</p>
+
+@code {
+    private string question;
+    private KernelResponse answer;
+
+    private async Task Ask()
+    {
+        answer = await AIService.AskQuestion(question);
+
+    }
+}

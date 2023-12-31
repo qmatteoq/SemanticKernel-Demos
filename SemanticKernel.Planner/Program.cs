@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Planning.Handlebars;
-using Microsoft.SemanticKernel.Plugins.OpenApi;
 using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
 
 var configuration = new ConfigurationBuilder()
