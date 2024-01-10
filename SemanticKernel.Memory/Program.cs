@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.KernelMemory;
 using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 var configuration = new ConfigurationBuilder()
@@ -33,6 +34,7 @@ var chatConfig = new AzureOpenAIConfig
     Auth = AzureOpenAIConfig.AuthTypes.APIKey
 };
 
+
 var kernelMemory = new KernelMemoryBuilder()
     .WithAzureOpenAITextGeneration(chatConfig)
     .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
@@ -44,24 +46,26 @@ var kernel = Kernel.CreateBuilder()
     .Build();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-
 kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "\\MailPlugin", "MailPlugin");
 
 var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
 kernel.ImportPluginFromObject(plugin, "memory");
+
+// RAG combined with plugins
+
+OpenAIPromptExecutionSettings settings = new()
+{
+    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+};
 
 var prompt = @"
             Question to Kernel Memory: {{$input}}
 
             Kernel Memory Answer: {{memory.ask $input}}
 
-            If the answer is empty say 'I don't know' otherwise reply with a business mail to share the answer.
+            If the answer is empty say 'I don't know', otherwise reply with a business mail to share the answer.
             ";
 
-OpenAIPromptExecutionSettings settings = new()
-{
-    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
-};
 
 KernelArguments arguments = new KernelArguments(settings)
 {
@@ -72,3 +76,28 @@ var response = await kernel.InvokePromptAsync(prompt, arguments);
 
 Console.WriteLine(response.GetValue<string>());
 Console.ReadLine();
+
+//chat experience
+
+//var chatHistory = new ChatHistory();
+//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+//while (true)
+//{
+//    var message = Console.ReadLine();
+
+//    var prompt = $@"
+//            Question to Kernel Memory: {message}
+
+//            Kernel Memory Answer: {{memory.ask}}
+
+//            If the answer is empty say 'I don't know', otherwise reply with the answer.
+//            ";
+
+
+//    chatHistory.AddMessage(AuthorRole.User, prompt);
+//    var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+//    Console.WriteLine(result.Content);
+//    chatHistory.AddMessage(AuthorRole.Assistant, result.Content);
+//}
+
