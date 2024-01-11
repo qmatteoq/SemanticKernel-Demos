@@ -41,11 +41,11 @@ namespace KernelMemory.Services
         kernelMemory = new KernelMemoryBuilder()
             .WithAzureOpenAITextGeneration(chatConfig)
             .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-            .WithSimpleVectorDb()
+            //.WithSimpleVectorDb()
             //uncomment the line below to store the vector database on disk
             //.WithSimpleVectorDb(path)
             //uncomment the line below to use Azure AI Search
-            //.WithAzureAISearch(searchEndpoint, searchApiKey)
+            .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
             .Build<MemoryServerless>();
         }
 

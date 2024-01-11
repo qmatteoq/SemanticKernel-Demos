@@ -38,7 +38,7 @@ var chatConfig = new AzureOpenAIConfig
 var kernelMemory = new KernelMemoryBuilder()
     .WithAzureOpenAITextGeneration(chatConfig)
     .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-    .WithAzureAISearch(searchEndpoint, searchApiKey)
+    .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
     .Build();
 
 var kernel = Kernel.CreateBuilder()

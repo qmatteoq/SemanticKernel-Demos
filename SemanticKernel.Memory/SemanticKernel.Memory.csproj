@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.23.231218.2" />
-    <PackageReference Include="Microsoft.KernelMemory.SemanticKernelPlugin" Version="0.23.231218.2" />
+    <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.26.240104.1" />
+    <PackageReference Include="Microsoft.KernelMemory.SemanticKernelPlugin" Version="0.26.240104.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
     <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.1" />
   </ItemGroup>
