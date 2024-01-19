@@ -6,7 +6,6 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Plugins.MsGraph;
 using Microsoft.SemanticKernel.Plugins.MsGraph.Connectors;
-using System.Text.Json;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("ee2ccf8c-37a6-4671-aaf4-a55a16903918")
@@ -30,11 +29,12 @@ var scopes = new[] { "Calendars.Read" };
 
 // Multi-tenant apps can use "common",
 // single-tenant apps must use the tenant ID from the Azure portal
-var tenantId = "15b5c0a0-bb97-43e6-807a-d0daf5bb7671";
+var tenantId = configuration["MicrosoftGraph:TenantId"];
 
 // Values from app registration
-var clientId = "7b105956-e771-4413-8da6-073d6ff01e02";
-var clientSecret = "FuI8Q~6AlvsfsFSJ1X~GuF8zND1PCDW8hPE6HdwJ";
+var clientId = configuration["MicrosoftGraph:ClientId"];
+var clientSecret = configuration["MicrosoftGraph:ClientSecret"];
+
 var options = new DeviceCodeCredentialOptions
 {
     AuthorityHost = AzureAuthorityHosts.AzurePublicCloud,
