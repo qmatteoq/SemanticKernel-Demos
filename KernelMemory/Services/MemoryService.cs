@@ -36,16 +36,21 @@ namespace KernelMemory.Services
                 Auth = AzureOpenAIConfig.AuthTypes.APIKey
             };
 
-        var path = Path.Combine($"{Directory.GetCurrentDirectory()}//Memory");
+            var directory = Path.GetDirectoryName(Environment.ProcessPath);
+            var path = Path.Combine(directory, "Memory");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
-        kernelMemory = new KernelMemoryBuilder()
+            kernelMemory = new KernelMemoryBuilder()
             .WithAzureOpenAITextGeneration(chatConfig)
             .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-            //.WithSimpleVectorDb()
+            .WithSimpleVectorDb()
             //uncomment the line below to store the vector database on disk
             //.WithSimpleVectorDb(path)
             //uncomment the line below to use Azure AI Search
-            .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
+            //.WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
             .Build<MemoryServerless>();
         }
 
@@ -92,7 +97,7 @@ namespace KernelMemory.Services
         public async Task<KernelResponse> AskQuestion(string question)
         {
             var answer = await kernelMemory.AskAsync(question);
-            
+
             var response = new KernelResponse
             {
                 Answer = answer.Result,

@@ -12,8 +12,4 @@
     <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.26.240104.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Documents\" />
-  </ItemGroup>
-
 </Project>

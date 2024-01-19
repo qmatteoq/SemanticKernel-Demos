@@ -1,4 +1,5 @@
 ﻿@page "/addcontent"
+@using System.Reflection
 @inject IMemoryService MemoryService
 @rendermode InteractiveServer
 
@@ -55,8 +56,14 @@
     {
         Output = "Saving file in progress...";
         var stream = e.File.OpenReadStream();
-        var path = Path.Combine($"{Directory.GetCurrentDirectory()}//Documents", e.File.Name);
-
+        var directory = Path.GetDirectoryName(Environment.ProcessPath);
+        var documentsPath = Path.Combine(directory, "Documents");
+        if (!Directory.Exists(documentsPath))
+        {
+            Directory.CreateDirectory(documentsPath);
+        }
+        var path = Path.Combine(directory, "Documents", e.File.Name);
+        
         using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
         {
             await stream.CopyToAsync(fileStream);
