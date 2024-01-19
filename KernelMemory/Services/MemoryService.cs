@@ -72,7 +72,7 @@ namespace KernelMemory.Services
         {
             try
             {
-                await kernelMemory.ImportDocumentAsync(path, filename);
+                await kernelMemory.ImportDocumentAsync(path, documentId: filename);
                 return true;
             }
             catch
