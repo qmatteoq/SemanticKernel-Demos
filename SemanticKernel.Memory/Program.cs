@@ -58,46 +58,47 @@ OpenAIPromptExecutionSettings settings = new()
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
 };
 
-var prompt = @"
-            Question to Kernel Memory: {{$input}}
+//var prompt = @"
+//            Question to Kernel Memory: {{$input}}
 
-            Kernel Memory Answer: {{memory.ask $input}}
+//            Kernel Memory Answer: {{memory.ask $input}}
 
-            If the answer is empty say 'I don't know', otherwise reply with a business mail to share the answer.
-            ";
-
-
-KernelArguments arguments = new KernelArguments(settings)
-{
-    { "input", "What is Contoso Electronics?" },
-};
-
-var response = await kernel.InvokePromptAsync(prompt, arguments);
-
-Console.WriteLine(response.GetValue<string>());
-Console.ReadLine();
-
-//chat experience
-
-//var chatHistory = new ChatHistory();
-//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-
-//while (true)
-//{
-//    var message = Console.ReadLine();
-
-//    var prompt = $@"
-//            Question to Kernel Memory: {message}
-
-//            Kernel Memory Answer: {{memory.ask}}
-
-//            If the answer is empty say 'I don't know', otherwise reply with the answer.
+//            If the answer is empty say 'I don't know', otherwise reply with a business mail to share the answer.
 //            ";
 
 
-//    chatHistory.AddMessage(AuthorRole.User, prompt);
-//    var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-//    Console.WriteLine(result.Content);
-//    chatHistory.AddMessage(AuthorRole.Assistant, result.Content);
-//}
+//KernelArguments arguments = new KernelArguments(settings)
+//{
+//    { "input", "What is Contoso Electronics?" },
+//};
 
+//var response = await kernel.InvokePromptAsync(prompt, arguments);
+
+//Console.WriteLine(response.GetValue<string>());
+//Console.ReadLine();
+
+//chat experience
+
+var chatHistory = new ChatHistory();
+var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+
+while (true)
+{
+    var message = Console.ReadLine();
+
+    var prompt = $@"
+            The following message contains a question and, optionally, a task to perform on the answer. 
+            First ask the question to Kernel Memory, then perform the requested task.
+            If Kernel Memory doesn't know the answer, say 'I don't know'.
+            If the question is about a topic that isn't convered by the information in Kernel Memory, say 'I can't answer that'.
+
+            Question: {message}
+
+            ";
+
+
+    chatHistory.AddMessage(AuthorRole.User, prompt);
+    var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+    Console.WriteLine(result.Content);
+    chatHistory.AddMessage(AuthorRole.Assistant, result.Content);
+}
