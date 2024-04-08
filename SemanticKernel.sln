@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.HandlebarsPl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.BingPlugin", "SemanticKernel.BuiltinPlugins\SemanticKernel.BingPlugin.csproj", "{CCBA55D1-02E6-42BA-AB83-62294B7C9972}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Memory", "SemanticKernel.Memory\SemanticKernel.Memory.csproj", "{C4D20CFF-FD54-4B56-B967-9ED28B22D6D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.ChatMemory", "SemanticKernel.Memory\SemanticKernel.ChatMemory.csproj", "{C4D20CFF-FD54-4B56-B967-9ED28B22D6D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Plugins", "SemanticKernel.Plugins\SemanticKernel.Plugins.csproj", "{4DBC630F-B460-4D0F-A212-02BA8C29274D}"
 EndProject
@@ -28,6 +28,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.GraphPlugin", "SemanticKernel.GraphPlugin\SemanticKernel.GraphPlugin.csproj", "{71226367-C069-4CC1-A96A-1530ADA0A9D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KernelMemory", "KernelMemory\KernelMemory.csproj", "{31473B5C-89A1-4077-BE25-2FB1A41096F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.PlannerTicket", "SemanticKernel.FunctionCallingTicket\SemanticKernel.PlannerTicket.csproj", "{2B301700-716D-43B1-AE9A-DF3CACEED948}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.KernelMemoryPlugin", "SemanticKernel.KernelMemoryPlugin\SemanticKernel.KernelMemoryPlugin.csproj", "{805AEA63-DB1E-444B-B539-802DE1390C0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,14 @@ Global
 		{31473B5C-89A1-4077-BE25-2FB1A41096F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31473B5C-89A1-4077-BE25-2FB1A41096F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31473B5C-89A1-4077-BE25-2FB1A41096F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B301700-716D-43B1-AE9A-DF3CACEED948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B301700-716D-43B1-AE9A-DF3CACEED948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B301700-716D-43B1-AE9A-DF3CACEED948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B301700-716D-43B1-AE9A-DF3CACEED948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805AEA63-DB1E-444B-B539-802DE1390C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805AEA63-DB1E-444B-B539-802DE1390C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805AEA63-DB1E-444B-B539-802DE1390C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805AEA63-DB1E-444B-B539-802DE1390C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

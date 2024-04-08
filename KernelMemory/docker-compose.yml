@@ -1,0 +1,15 @@
+version: '3'
+services:
+  kernelmemory:
+    image: kernelmemory_qdrant
+    ports:
+      - 9001:9001
+    container_name: kernelmemory
+    depends_on:
+      - qdrant
+
+  qdrant:
+    image: qdrant/qdrant
+    ports:
+      - 6333:6333
+    container_name: qdrant

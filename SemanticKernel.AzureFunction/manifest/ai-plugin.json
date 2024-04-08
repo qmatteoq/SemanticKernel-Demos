@@ -9,7 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "{url}/api/swagger.json"
+    "url": "{url}/api/swagger.yaml"
   },
   "logo_url": "{url}/logo.png",
   "contact_email": "info@developerscantina.com",

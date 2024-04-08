@@ -43,15 +43,18 @@ namespace KernelMemory.Services
                 Directory.CreateDirectory(path);
             }
 
-            kernelMemory = new KernelMemoryBuilder()
-            .WithAzureOpenAITextGeneration(chatConfig)
-            .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-            .WithSimpleVectorDb()
-            //uncomment the line below to store the vector database on disk
-            //.WithSimpleVectorDb(path)
-            //uncomment the line below to use Azure AI Search
-            //.WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
-            .Build<MemoryServerless>();
+            //kernelMemory = new KernelMemoryBuilder()
+            //.WithAzureOpenAITextGeneration(chatConfig)
+            //.WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
+            //.WithSimpleVectorDb()
+            ////uncomment the line below to store the vector database on disk
+            ////.WithSimpleVectorDb(path)
+            ////uncomment the line below to use Azure AI Search
+            ////.WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
+            ////.WithQdrantMemoryDb("http://localhost:6333/")
+            //.Build<MemoryServerless>();
+
+            kernelMemory = new MemoryWebClient("http://127.0.0.1:9001");
         }
 
         public async Task<bool> StoreText(string text)
@@ -72,10 +75,11 @@ namespace KernelMemory.Services
         {
             try
             {
-                await kernelMemory.ImportDocumentAsync(path, documentId: filename);
+                string id = filename.Replace(" ", "_");
+                await kernelMemory.ImportDocumentAsync(path, documentId: id);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }

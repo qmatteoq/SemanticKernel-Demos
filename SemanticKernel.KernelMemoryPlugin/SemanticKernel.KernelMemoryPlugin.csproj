@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>d8c59b05-94be-43c9-abca-1445b4d2d06f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Plugins\MailPlugin\WriteProfessionalMail\config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Plugins\MailPlugin\WriteProfessionalMail\skprompt.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.35.240321.1" />
+    <PackageReference Include="Microsoft.KernelMemory.SemanticKernelPlugin" Version="0.35.240321.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.6.3" />
+    <PackageReference Include="Microsoft.SemanticKernel.Plugins.OpenApi" Version="1.6.3-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Planners.OpenAI" Version="1.6.3-preview" />
+  </ItemGroup>
+
+</Project>

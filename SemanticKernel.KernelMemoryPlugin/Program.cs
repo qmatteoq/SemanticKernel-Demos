@@ -3,10 +3,11 @@ using Microsoft.KernelMemory;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
-
+using Microsoft.SemanticKernel.Planning;
+using Microsoft.SemanticKernel.Plugins.OpenApi;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("2d112f3a-9cf4-4b55-931e-474661e9d70d")
+    .AddUserSecrets("d8c59b05-94be-43c9-abca-1445b4d2d06f")
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];
@@ -50,33 +51,23 @@ kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "\\MailPlugin", "MailP
 var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
 kernel.ImportPluginFromObject(plugin, "memory");
 
-OpenAIPromptExecutionSettings settings = new()
-{
-    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
-};
+#pragma warning disable SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
-//chat experience
+const string pluginManifestUrl = "https://ticketapi-net8.azurewebsites.net/api/.well-known/ai-plugin.json";
+await kernel.ImportPluginFromOpenAIAsync("TicketPlugin", new Uri(pluginManifestUrl));
 
-var chatHistory = new ChatHistory();
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-
-while (true)
-{
-    var message = Console.ReadLine();
-
-    var prompt = $@"
-            The following message contains a question and, optionally, a task to perform on the answer. 
-            First ask the question to Kernel Memory, then perform the requested task. Use any plugin you might need to complete the task.
-            If Kernel Memory doesn't know the answer, say 'I don't know'.
-            If the question is about a topic that isn't convered by the information in Kernel Memory, say 'I can't answer that'.
-
-            Question: {message}
-
-            ";
+#pragma warning restore SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 
-    chatHistory.AddMessage(AuthorRole.User, prompt);
-    var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-    Console.WriteLine(result.Content);
-    chatHistory.AddMessage(AuthorRole.Assistant, result.Content);
-}
+#pragma warning disable SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+var planner = new FunctionCallingStepwisePlanner();
+
+string prompt = @"Get a list of all the tickets about CSS. Then find from the knowledge base using Kernel Memory a list of potential CSS issues and how to fix them.
+Finally, write a professional mail to the team to share the list of tickets and how to potentially fix them.";
+
+var result = await planner.ExecuteAsync(kernel, prompt);
+
+Console.WriteLine(result.FinalAnswer);
+Console.ReadLine();
+
+#pragma warning restore SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
