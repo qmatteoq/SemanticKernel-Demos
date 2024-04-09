@@ -26,4 +26,8 @@
     <PackageReference Include="Microsoft.SemanticKernel.Planners.OpenAI" Version="1.6.3-preview" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SemanticKernel.Plugins\SemanticKernel.Plugins.csproj" />
+  </ItemGroup>
+
 </Project>

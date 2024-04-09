@@ -5,6 +5,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Planning;
 using Microsoft.SemanticKernel.Plugins.OpenApi;
+using SemanticKernel.Plugins.Plugins.TicketPlugin;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("d8c59b05-94be-43c9-abca-1445b4d2d06f")
@@ -14,6 +15,7 @@ string apiKey = configuration["AzureOpenAI:ApiKey"];
 string deploymentChatName = configuration["AzureOpenAI:DeploymentChatName"];
 string deploymentEmbeddingName = configuration["AzureOpenAI:DeploymentEmbeddingName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
+
 
 //var embeddingConfig = new AzureOpenAIConfig
 //{
@@ -39,7 +41,7 @@ string endpoint = configuration["AzureOpenAI:Endpoint"];
 //    .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
 //    .Build();
 
-var kernelMemory = new MemoryWebClient("http://127.0.0.1:9001");
+var kernelMemory = new MemoryWebClient("http://localhost:9001");
 
 var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentChatName, endpoint, apiKey)
@@ -51,19 +53,13 @@ kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "\\MailPlugin", "MailP
 var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
 kernel.ImportPluginFromObject(plugin, "memory");
 
-#pragma warning disable SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-
-const string pluginManifestUrl = "https://ticketapi-net8.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportPluginFromOpenAIAsync("TicketPlugin", new Uri(pluginManifestUrl));
-
-#pragma warning restore SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-
+kernel.ImportPluginFromType<TicketPlugin>();
 
 #pragma warning disable SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var planner = new FunctionCallingStepwisePlanner();
 
 string prompt = @"Get a list of all the tickets about CSS. Then find from the knowledge base using Kernel Memory a list of potential CSS issues and how to fix them.
-Finally, write a professional mail to the team to share the list of tickets and how to potentially fix them.";
+Finally, draft a professional mail to the team to share the list of tickets and how to potentially fix them and print it on the screen.";
 
 var result = await planner.ExecuteAsync(kernel, prompt);
 

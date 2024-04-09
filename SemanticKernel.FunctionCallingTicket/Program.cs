@@ -2,6 +2,7 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Planning;
 using Microsoft.SemanticKernel.Plugins.OpenApi;
+using SemanticKernel.Plugins.Plugins.TicketPlugin;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets("d696f8b6-b14f-4f1e-acf2-2567451363c6")
@@ -15,12 +16,7 @@ var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
     .Build();
 
-#pragma warning disable SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
-
-const string pluginManifestUrl = "https://ticketapi-net8.azurewebsites.net/api/.well-known/ai-plugin.json";
-await kernel.ImportPluginFromOpenAIAsync("TicketPlugin", new Uri(pluginManifestUrl));
-
-#pragma warning restore SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+kernel.ImportPluginFromType<TicketPlugin>();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Prompts");
 var prompts = kernel.CreatePluginFromPromptDirectory(pluginsDirectory);

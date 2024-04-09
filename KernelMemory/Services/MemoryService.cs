@@ -54,7 +54,7 @@ namespace KernelMemory.Services
             ////.WithQdrantMemoryDb("http://localhost:6333/")
             //.Build<MemoryServerless>();
 
-            kernelMemory = new MemoryWebClient("http://127.0.0.1:9001");
+            kernelMemory = new MemoryWebClient("http://localhost:9001");
         }
 
         public async Task<bool> StoreText(string text)
