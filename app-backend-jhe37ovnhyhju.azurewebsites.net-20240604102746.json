@@ -1,0 +1,337 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "https://app-backend-jhe37ovnhyhju.azurewebsites.net API",
+    "description": "https://app-backend-jhe37ovnhyhju.azurewebsites.net API",
+    "version": "v1.0"
+  },
+  "servers": [
+    {
+      "url": "https://app-backend-jhe37ovnhyhju.azurewebsites.net"
+    }
+  ],
+  "paths": {
+    "/chat": {
+      "description": "Provides operations to manage chat",
+      "post": {
+        "summary": "Post chat",
+        "operationId": "Post.chat",
+        "parameters": [
+          {
+            "name": "Postman-Token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "messages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "content": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "stream": {
+                    "type": "boolean"
+                  },
+                  "context": {
+                    "type": "object"
+                  },
+                  "session_state": {
+                    "type": "object"
+                  },
+                  "overrides": {
+                    "type": "object",
+                    "properties": {
+                      "temperature": {
+                        "type": "number"
+                      },
+                      "top": {
+                        "type": "number"
+                      },
+                      "retrieval_mode": {
+                        "type": "string"
+                      },
+                      "semantic_ranker": {
+                        "type": "boolean"
+                      },
+                      "semantic_captions": {
+                        "type": "boolean"
+                      },
+                      "suggest_followup_questions": {
+                        "type": "boolean"
+                      },
+                      "use_oid_security_filter": {
+                        "type": "boolean"
+                      },
+                      "use_groups_security_filter": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "choices": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "content_filter_results": {
+                            "type": "object",
+                            "properties": {
+                              "hate": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "self_harm": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "sexual": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "violence": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "context": {
+                            "type": "object",
+                            "properties": {
+                              "data_points": {
+                                "type": "object",
+                                "properties": {
+                                  "text": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "thoughts": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description": {
+                                      "type": "string"
+                                    },
+                                    "props": {
+                                      "type": "object",
+                                      "properties": {
+                                        "filter": {
+                                          "type": "object"
+                                        },
+                                        "has_vector": {
+                                          "type": "boolean"
+                                        },
+                                        "top": {
+                                          "type": "number"
+                                        },
+                                        "use_semantic_captions": {
+                                          "type": "boolean"
+                                        },
+                                        "use_semantic_ranker": {
+                                          "type": "boolean"
+                                        }
+                                      }
+                                    },
+                                    "title": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "finish_reason": {
+                            "type": "string"
+                          },
+                          "index": {
+                            "type": "number"
+                          },
+                          "logprobs": {
+                            "type": "object"
+                          },
+                          "message": {
+                            "type": "object",
+                            "properties": {
+                              "content": {
+                                "type": "string"
+                              },
+                              "function_call": {
+                                "type": "object"
+                              },
+                              "role": {
+                                "type": "string"
+                              },
+                              "tool_calls": {
+                                "type": "object"
+                              }
+                            }
+                          },
+                          "session_state": {
+                            "type": "object"
+                          }
+                        }
+                      }
+                    },
+                    "created": {
+                      "type": "number"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "object": {
+                      "type": "string"
+                    },
+                    "prompt_filter_results": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "content_filter_results": {
+                            "type": "object",
+                            "properties": {
+                              "hate": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "self_harm": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "sexual": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "violence": {
+                                "type": "object",
+                                "properties": {
+                                  "filtered": {
+                                    "type": "boolean"
+                                  },
+                                  "severity": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "prompt_index": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    },
+                    "system_fingerprint": {
+                      "type": "string"
+                    },
+                    "usage": {
+                      "type": "object",
+                      "properties": {
+                        "completion_tokens": {
+                          "type": "number"
+                        },
+                        "prompt_tokens": {
+                          "type": "number"
+                        },
+                        "total_tokens": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-ms-generated-by": {
+    "toolName": "Dev Proxy",
+    "toolVersion": "0.16.0"
+  }
+}

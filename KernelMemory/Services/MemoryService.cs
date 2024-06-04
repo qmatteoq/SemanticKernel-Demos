@@ -17,6 +17,9 @@ namespace KernelMemory.Services
             string searchApiKey = configuration["AzureSearch:ApiKey"];
             string searchEndpoint = configuration["AzureSearch:Endpoint"];
 
+            string kernelMemoryApiKey = configuration["KernelMemoryService:ApiKey1"];
+            string kernelMemoryEndpoint = configuration["KernelMemoryService:Endpoint"];
+
 
             var embeddingConfig = new AzureOpenAIConfig
             {
@@ -54,7 +57,8 @@ namespace KernelMemory.Services
             ////.WithQdrantMemoryDb("http://localhost:6333/")
             //.Build<MemoryServerless>();
 
-            kernelMemory = new MemoryWebClient("http://localhost:9001");
+            kernelMemory = new MemoryWebClient("http://localhost:9001", kernelMemoryApiKey);
+            //kernelMemory = new MemoryWebClient(kernelMemoryEndpoint, kernelMemoryApiKey);
         }
 
         public async Task<bool> StoreText(string text)
