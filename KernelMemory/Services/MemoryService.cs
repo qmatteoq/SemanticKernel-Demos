@@ -39,6 +39,14 @@ namespace KernelMemory.Services
                 Auth = AzureOpenAIConfig.AuthTypes.APIKey
             };
 
+            var searchConfig = new AzureAISearchConfig
+            {
+                APIKey = searchApiKey,
+                Endpoint = searchEndpoint,
+                UseHybridSearch = true,
+                Auth = AzureAISearchConfig.AuthTypes.APIKey
+            };
+            
             var directory = Path.GetDirectoryName(Environment.ProcessPath);
             var path = Path.Combine(directory, "Memory");
             if (!Directory.Exists(path))
@@ -46,19 +54,19 @@ namespace KernelMemory.Services
                 Directory.CreateDirectory(path);
             }
 
-            //kernelMemory = new KernelMemoryBuilder()
-            //.WithAzureOpenAITextGeneration(chatConfig)
-            //.WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-            //.WithSimpleVectorDb()
-            ////uncomment the line below to store the vector database on disk
-            ////.WithSimpleVectorDb(path)
-            ////uncomment the line below to use Azure AI Search
-            ////.WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
-            ////.WithQdrantMemoryDb("http://localhost:6333/")
-            //.Build<MemoryServerless>();
+            kernelMemory = new KernelMemoryBuilder()
+            .WithAzureOpenAITextGeneration(chatConfig)
+            .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
+            .WithSimpleVectorDb()
+            //uncomment the line below to store the vector database on disk
+            //.WithSimpleVectorDb(path)
+            //uncomment the line below to use Azure AI Search
+            .WithAzureAISearchMemoryDb(searchConfig)
+            //.WithQdrantMemoryDb("http://localhost:6333/")
+            .Build<MemoryServerless>();
 
-            kernelMemory = new MemoryWebClient("http://localhost:9001", kernelMemoryApiKey);
-            //kernelMemory = new MemoryWebClient(kernelMemoryEndpoint, kernelMemoryApiKey);
+            //kernelMemory = new MemoryWebClient("http://localhost:9001", kernelMemoryApiKey);
+            kernelMemory = new MemoryWebClient(kernelMemoryEndpoint, kernelMemoryApiKey);
         }
 
         public async Task<bool> StoreText(string text)
