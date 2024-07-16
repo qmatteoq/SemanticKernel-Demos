@@ -19,8 +19,6 @@ var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
     .Build();
 
-
-
 // The client credentials flow requires that you request the
 // /.default scope, and pre-configure your permissions on the
 // app registration in Azure. An administrator must grant consent
@@ -55,7 +53,7 @@ var deviceCodeCredential = new DeviceCodeCredential(options);
 
 var graphClient = new GraphServiceClient(deviceCodeCredential, scopes);
 
-#pragma warning disable SKEXP0053 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning disable SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 OutlookCalendarConnector connector = new OutlookCalendarConnector(graphClient);
 CalendarPlugin plugin = new CalendarPlugin(connector);
@@ -74,6 +72,6 @@ await foreach (var message in results)
     Console.Write(message);
 }
 
-#pragma warning restore SKEXP0053 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning restore SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 

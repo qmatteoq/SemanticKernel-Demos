@@ -19,48 +19,48 @@ var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
     .Build();
 
-#pragma warning disable SKEXP0054 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning disable SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var bingConnector = new BingConnector(bingKey);
 var plugin = new WebSearchEnginePlugin(bingConnector);
 kernel.ImportPluginFromObject(plugin, "BingPlugin");
 
 OpenAIPromptExecutionSettings settings = new()
 {
-    ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions
+    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };
 
-//var results = kernel.InvokePromptStreamingAsync("What is Semantic Kernel from Microsoft?", new KernelArguments(settings));
-//await foreach (var message in results)
-//{
-//    Console.Write(message);
-//}   
-
-//Console.WriteLine();
-//Console.ReadLine();
-
-
-var chatHistory = new ChatHistory();
-chatHistory.AddMessage(AuthorRole.User, "What is Semantic Kernel from Microsoft?");
-
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-
-var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
-foreach (var functionCall in functionCalls)
+var results = kernel.InvokePromptStreamingAsync("What is Semantic Kernel from Microsoft?", new KernelArguments(settings));
+await foreach (var message in results)
 {
-    KernelFunction pluginFunction;
-    KernelArguments arguments;
-    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
-    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-    var jsonResponse = functionResult.GetValue<object>();
-    var json = JsonSerializer.Serialize(jsonResponse);
-    Console.WriteLine(json);
-    chatHistory.AddMessage(AuthorRole.Tool, json);
+    Console.Write(message);
 }
 
-result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+Console.WriteLine();
+Console.ReadLine();
 
-Console.WriteLine(result.Content);
+
+//var chatHistory = new ChatHistory();
+//chatHistory.AddMessage(AuthorRole.User, "What is Semantic Kernel from Microsoft?");
+
+//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+//var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+
+//var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
+//foreach (var functionCall in functionCalls)
+//{
+//    KernelFunction pluginFunction;
+//    KernelArguments arguments;
+//    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
+//    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
+//    var jsonResponse = functionResult.GetValue<object>();
+//    var json = JsonSerializer.Serialize(jsonResponse);
+//    Console.WriteLine(json);
+//    chatHistory.AddMessage(AuthorRole.Tool, json);
+//}
+
+//result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+
+//Console.WriteLine(result.Content);
 
 
-#pragma warning restore SKEXP0054 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning restore SKEXP0050 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.

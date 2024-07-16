@@ -14,38 +14,49 @@ string deploymentChatName = configuration["AzureOpenAI:DeploymentChatName"];
 string deploymentEmbeddingName = configuration["AzureOpenAI:DeploymentEmbeddingName"];
 string endpoint = configuration["AzureOpenAI:Endpoint"];
 
-//var embeddingConfig = new AzureOpenAIConfig
-//{
-//    APIKey = apiKey,
-//    Deployment = deploymentEmbeddingName,
-//    Endpoint = endpoint,
-//    APIType = AzureOpenAIConfig.APITypes.EmbeddingGeneration,
-//    Auth = AzureOpenAIConfig.AuthTypes.APIKey
-//};
+string searchApiKey = configuration["AzureSearch:ApiKey"];
+string searchEndpoint = configuration["AzureSearch:Endpoint"];
 
-//var chatConfig = new AzureOpenAIConfig
-//{
-//    APIKey = apiKey,
-//    Deployment = deploymentChatName,
-//    Endpoint = endpoint,
-//    APIType = AzureOpenAIConfig.APITypes.ChatCompletion,
-//    Auth = AzureOpenAIConfig.AuthTypes.APIKey
-//};
+var embeddingConfig = new AzureOpenAIConfig
+{
+    APIKey = apiKey,
+    Deployment = deploymentEmbeddingName,
+    Endpoint = endpoint,
+    APIType = AzureOpenAIConfig.APITypes.EmbeddingGeneration,
+    Auth = AzureOpenAIConfig.AuthTypes.APIKey
+};
 
-//var kernelMemory = new KernelMemoryBuilder()
-//    .WithAzureOpenAITextGeneration(chatConfig)
-//    .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
-//    .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
-//    .Build();
+var chatConfig = new AzureOpenAIConfig
+{
+    APIKey = apiKey,
+    Deployment = deploymentChatName,
+    Endpoint = endpoint,
+    APIType = AzureOpenAIConfig.APITypes.ChatCompletion,
+    Auth = AzureOpenAIConfig.AuthTypes.APIKey
+};
 
-var kernelMemory = new MemoryWebClient("http://127.0.0.1:9001");
+var searchConfig = new AzureAISearchConfig
+{
+    APIKey = searchApiKey,
+    Endpoint = searchEndpoint,
+    UseHybridSearch = true,
+    Auth = AzureAISearchConfig.AuthTypes.APIKey
+};
+
+var kernelMemory = new KernelMemoryBuilder()
+    .WithAzureOpenAITextGeneration(chatConfig)
+    .WithAzureOpenAITextEmbeddingGeneration(embeddingConfig)
+    .WithAzureAISearchMemoryDb(searchEndpoint, searchApiKey)
+    .Build();
+
+//var kernelMemory = new MemoryWebClient("http://127.0.0.1:9001");
 
 var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentChatName, endpoint, apiKey)
     .Build();
 
-var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-kernel.ImportPluginFromPromptDirectory(pluginsDirectory + "\\MailPlugin", "MailPlugin");
+var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
 var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
 kernel.ImportPluginFromObject(plugin, "memory");

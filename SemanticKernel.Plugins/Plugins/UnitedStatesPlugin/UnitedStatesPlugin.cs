@@ -31,7 +31,7 @@ namespace SemanticKernel.Plugins.Plugins.UnitedStatesPlugin
             string request = "https://datausa.io/api/data?drilldowns=Year,Gender&measures=Total+Population";
             HttpClient client = new HttpClient();
             var result = await client.GetFromJsonAsync<GenderResult>(request);
-            var populationData = result.data.FirstOrDefault(x => x.Year == year && x.Gender.ToLower() == gender);
+            var populationData = result.data.FirstOrDefault(x => x.Year == year && x.Gender.ToLower() == gender.ToLower());
 
             var response = new UnitedStatesResponse
             {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Planning;
 using Microsoft.SemanticKernel.Plugins.OpenApi;
 using SemanticKernel.Plugins.Plugins.TicketPlugin;
@@ -18,16 +19,13 @@ var kernel = Kernel.CreateBuilder()
 
 kernel.ImportPluginFromType<TicketPlugin>();
 
-var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Prompts");
-var prompts = kernel.CreatePluginFromPromptDirectory(pluginsDirectory);
-kernel.ImportPluginFromFunctions("prompts", prompts);
+var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
+kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
-// automatic function calling
+string prompt = "Get a list of all the tickets about CSS. Then write a professional mail to the team to share their current status.";
 
 #pragma warning disable SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var planner = new FunctionCallingStepwisePlanner();
-
-string prompt = "Get a list of all the tickets about CSS. Then write a professional mail to the team to share their current status.";
 
 var result = await planner.ExecuteAsync(kernel, prompt);
 

@@ -20,50 +20,50 @@ var kernel = Kernel.CreateBuilder()
 
 kernel.ImportPluginFromType<UnitedStatesPlugin>();
 
-//manual function execution
-OpenAIPromptExecutionSettings settings = new()
-{
-    ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions,
-};
-
 string prompt = @"Write a paragraph to share the population of the United States in 2015. 
 Make sure to specify how many people, among the population, identify themselves as male and female. 
 Don't share approximations, please share the exact numbers.";
 
-var chatHistory = new ChatHistory();
-chatHistory.AddMessage(AuthorRole.User, prompt);
+////manual function execution
+//OpenAIPromptExecutionSettings settings = new()
+//{
+//    ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions,
+//};
 
-var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+//var chatHistory = new ChatHistory();
+//chatHistory.AddMessage(AuthorRole.User, prompt);
 
-var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
-foreach (var functionCall in functionCalls)
-{
-    KernelFunction pluginFunction;
-    KernelArguments arguments;
-    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
-    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-    var jsonResponse = functionResult.GetValue<object>();
-    var json = JsonSerializer.Serialize(jsonResponse);
-    Console.WriteLine(json);
-    chatHistory.AddMessage(AuthorRole.Tool, json);
-}
+//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
+//var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
 
-result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+//var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
+//foreach (var functionCall in functionCalls)
+//{
+//    KernelFunction pluginFunction;
+//    KernelArguments arguments;
+//    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
+//    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
+//    var jsonResponse = functionResult.GetValue<object>();
+//    var json = JsonSerializer.Serialize(jsonResponse);
+//    Console.WriteLine(json);
+//    chatHistory.AddMessage(AuthorRole.Tool, json);
+//}
 
-Console.WriteLine(result.Content);
+//result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+
+//Console.WriteLine(result.Content);
 
 // automatic function calling
 
-//OpenAIPromptExecutionSettings settings = new()
-//{
-//    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
-//};
+OpenAIPromptExecutionSettings settings = new()
+{
+    ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
+};
 
-//var streamingResult = kernel.InvokePromptStreamingAsync(prompt, new KernelArguments(settings));
-//await foreach (var streamingResponse in streamingResult)
-//{
-//    Console.Write(streamingResponse);
-//}
+var streamingResult = kernel.InvokePromptStreamingAsync(prompt, new KernelArguments(settings));
+await foreach (var streamingResponse in streamingResult)
+{
+    Console.Write(streamingResponse);
+}
 
 Console.ReadLine();

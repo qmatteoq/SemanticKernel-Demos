@@ -15,13 +15,12 @@ var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
     .Build();
 
-
 kernel.ImportPluginFromType<UnitedStatesPlugin>();
 
 var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
 kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 
-#pragma warning disable SKEXP0061 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning disable SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 var planner = new FunctionCallingStepwisePlanner();
 
 var ask = @"Write a business mail to share the population of the United States in 2015. 
@@ -33,4 +32,4 @@ var result = await planner.ExecuteAsync(kernel, ask);
 Console.WriteLine(result.FinalAnswer);
 Console.ReadLine();
 
-#pragma warning restore SKEXP0061 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning restore SKEXP0060 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.

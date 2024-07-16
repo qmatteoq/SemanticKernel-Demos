@@ -17,7 +17,7 @@ namespace KernelMemory.Services
             string searchApiKey = configuration["AzureSearch:ApiKey"];
             string searchEndpoint = configuration["AzureSearch:Endpoint"];
 
-            string kernelMemoryApiKey = configuration["KernelMemoryService:ApiKey1"];
+            string kernelMemoryApiKey = configuration["KernelMemoryService:ApiKey"];
             string kernelMemoryEndpoint = configuration["KernelMemoryService:Endpoint"];
 
 
@@ -62,6 +62,7 @@ namespace KernelMemory.Services
             //.WithSimpleVectorDb(path)
             //uncomment the line below to use Azure AI Search
             .WithAzureAISearchMemoryDb(searchConfig)
+            //uncomment the line below to use QDrant
             //.WithQdrantMemoryDb("http://localhost:6333/")
             .Build<MemoryServerless>();
 

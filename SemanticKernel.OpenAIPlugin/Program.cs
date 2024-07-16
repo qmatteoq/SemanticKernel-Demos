@@ -15,7 +15,7 @@ var kernel = Kernel.CreateBuilder()
     .Build();
 
 
-#pragma warning disable SKEXP0042 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning disable SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 
 const string pluginManifestUrl = "https://semantickernel-unitedstatesdata.azurewebsites.net/api/.well-known/ai-plugin.json";
 await kernel.ImportPluginFromOpenAIAsync("UnitedStatesPlugin", new Uri(pluginManifestUrl));
@@ -32,4 +32,4 @@ var result = await kernel.InvokeAsync(function, variables);
 Console.WriteLine(result.GetValue<RestApiOperationResponse>().Content);
 Console.ReadLine();
 
-#pragma warning restore SKEXP0042 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+#pragma warning restore SKEXP0040 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.

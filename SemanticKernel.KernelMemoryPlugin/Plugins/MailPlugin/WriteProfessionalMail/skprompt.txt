@@ -1,4 +1,0 @@
-﻿Take the following text and turn it into a professional mail. Use a professional tone, be clear and concise.
-Always end up the mail with the message "Written by an AI Assistant".
-
-Text: {{$input}}

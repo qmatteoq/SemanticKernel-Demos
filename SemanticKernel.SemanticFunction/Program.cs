@@ -13,12 +13,11 @@ var kernel = Kernel.CreateBuilder()
     .AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey)
     .Build();
 
-var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins");
-
 //use classic approach
 
+var pluginsDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Plugins", "MailPlugin");
 kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
-var function = kernel.Plugins.GetFunction("MailPlugin", "WriteBusinessMail");
+var function = kernel.Plugins.GetFunction("MailPlugin", "WriteProfessionalMail");
 
 //use yaml approach
 
