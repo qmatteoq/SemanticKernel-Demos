@@ -1,5 +1,7 @@
-﻿using KernelMemory.Models;
+﻿using Elastic.Clients.Elasticsearch.Ingest;
+using KernelMemory.Models;
 using Microsoft.KernelMemory;
+using Document = Microsoft.KernelMemory.Document;
 
 namespace KernelMemory.Services
 {
@@ -67,7 +69,7 @@ namespace KernelMemory.Services
             .Build<MemoryServerless>();
 
             //kernelMemory = new MemoryWebClient("http://localhost:9001", kernelMemoryApiKey);
-            kernelMemory = new MemoryWebClient(kernelMemoryEndpoint, kernelMemoryApiKey);
+            //kernelMemory = new MemoryWebClient(kernelMemoryEndpoint, kernelMemoryApiKey);
         }
 
         public async Task<bool> StoreText(string text)
@@ -89,7 +91,7 @@ namespace KernelMemory.Services
             try
             {
                 string id = filename.Replace(" ", "_");
-                await kernelMemory.ImportDocumentAsync(path, documentId: id);
+                await kernelMemory.ImportDocumentAsync(path, documentId: id, tags: new TagCollection { "title", id });
                 return true;
             }
             catch (Exception ex)
