@@ -1,0 +1,213 @@
+{
+  "flow_runs": [
+    {
+      "run_id": "fa94f2e4-2388-487e-8949-b9f0bc1279f1_0",
+      "status": "Completed",
+      "error": null,
+      "inputs": {
+        "firstName": "Matteo",
+        "context": "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic  components for both commercial and military aircraft. We specialize in creating cutting edge systems that are both reliable and efficient. Our mission is to provide the highest  quality aircraft components to our customers, while maintaining a commitment to safety  and excellence. We are proud to have built a strong reputation in the aerospace industry  and strive to continually improve our products and services. Our experienced team of  engineers and technicians are dedicated to providing the best products and services to our  customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come\n",
+        "question": "Which type of srvices does Contoso Electronics provide?"
+      },
+      "output": {
+        "output": "Hey Matteo! Contoso Electronics offers services focused on the aerospace industry, including:\n\n1. **Advanced Electronic Components:** Tailored for both commercial and military aircraft.\n2. **Cutting-Edge Systems:** Reliable and efficient solutions for various aviation needs.\n3. **Engineering and Technical Support:** A dedicated team ensuring top-notch product performance.\n\nWe pride ourselves on providing high-quality, safe, and innovative solutions to meet our customers' needs. ✈️🔧\n\nGot any more questions? Feel free to ask!"
+      },
+      "metrics": null,
+      "request": null,
+      "parent_run_id": "fa94f2e4-2388-487e-8949-b9f0bc1279f1",
+      "root_run_id": "fa94f2e4-2388-487e-8949-b9f0bc1279f1",
+      "source_run_id": null,
+      "flow_id": "default_flow_id",
+      "start_time": "2024-07-24T09:21:48.162528Z",
+      "end_time": "2024-07-24T09:21:54.414785Z",
+      "index": 0,
+      "api_calls": [
+        {
+          "name": "ContosoElectronics",
+          "type": "Function",
+          "inputs": {},
+          "output": "Hey Matteo! Contoso Electronics offers services focused on the aerospace industry, including:\n\n1. **Advanced Electronic Components:** Tailored for both commercial and military aircraft.\n2. **Cutting-Edge Systems:** Reliable and efficient solutions for various aviation needs.\n3. **Engineering and Technical Support:** A dedicated team ensuring top-notch product performance.\n\nWe pride ourselves on providing high-quality, safe, and innovative solutions to meet our customers' needs. ✈️🔧\n\nGot any more questions? Feel free to ask!",
+          "start_time": 1721805708.162528,
+          "end_time": 1721805714.412724,
+          "error": null,
+          "children": [
+            {
+              "name": "Prompty",
+              "type": "Function",
+              "inputs": {},
+              "output": "Hey Matteo! Contoso Electronics offers services focused on the aerospace industry, including:\n\n1. **Advanced Electronic Components:** Tailored for both commercial and military aircraft.\n2. **Cutting-Edge Systems:** Reliable and efficient solutions for various aviation needs.\n3. **Engineering and Technical Support:** A dedicated team ensuring top-notch product performance.\n\nWe pride ourselves on providing high-quality, safe, and innovative solutions to meet our customers' needs. ✈️🔧\n\nGot any more questions? Feel free to ask!",
+              "start_time": 1721805708.163032,
+              "end_time": 1721805714.412724,
+              "error": null,
+              "children": [
+                {
+                  "name": "convert_prompt_template",
+                  "type": "Function",
+                  "inputs": {
+                    "template": "\nsystem:\nYou are an AI assistant who helps people find information. As the assistant, \nyou answer questions briefly, succinctly, and in a personable manner using \nmarkdown and even add some personal flair with appropriate emojis.\n\n# Customer\nYou are helping {{firstName}} to find answers to their questions.\nUse their name to address them in your responses.\n\n\n# Context\nUse the following context to provide a more personalized response to {{firstName}}:\n{{context}}\n\nuser:\n{{question}}\n",
+                    "inputs": {
+                      "firstName": "Matteo",
+                      "context": "Contoso Electronics is a leader in the aerospace industry, providing advanced electronic  components for both commercial and military aircraft. We specialize in creating cutting edge systems that are both reliable and efficient. Our mission is to provide the highest  quality aircraft components to our customers, while maintaining a commitment to safety  and excellence. We are proud to have built a strong reputation in the aerospace industry  and strive to continually improve our products and services. Our experienced team of  engineers and technicians are dedicated to providing the best products and services to our  customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come\n",
+                      "question": "Which type of srvices does Contoso Electronics provide?"
+                    }
+                  },
+                  "output": [
+                    {
+                      "role": "system",
+                      "content": "You are an AI assistant who helps people find information. As the assistant, \nyou answer questions briefly, succinctly, and in a personable manner using \nmarkdown and even add some personal flair with appropriate emojis.\n\n# Customer\nYou are helping Matteo to find answers to their questions.\nUse their name to address them in your responses.\n\n\n# Context\nUse the following context to provide a more personalized response to Matteo:\nContoso Electronics is a leader in the aerospace industry, providing advanced electronic  components for both commercial and military aircraft. We specialize in creating cutting edge systems that are both reliable and efficient. Our mission is to provide the highest  quality aircraft components to our customers, while maintaining a commitment to safety  and excellence. We are proud to have built a strong reputation in the aerospace industry  and strive to continually improve our products and services. Our experienced team of  engineers and technicians are dedicated to providing the best products and services to our  customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come"
+                    },
+                    {
+                      "role": "user",
+                      "content": "Which type of srvices does Contoso Electronics provide?"
+                    }
+                  ],
+                  "start_time": 1721805708.16404,
+                  "end_time": 1721805708.168669,
+                  "error": null,
+                  "children": [],
+                  "node_name": null,
+                  "parent_id": "42f6893d-b6e6-462c-9eb8-3b14445c0c7c",
+                  "id": "be14e367-ba8f-4c80-8bc4-5a6aac31229d",
+                  "function": "convert_prompt_template",
+                  "system_metrics": {}
+                },
+                {
+                  "name": "openai_chat",
+                  "type": "LLM",
+                  "inputs": {
+                    "max_tokens": 3000,
+                    "model": "gpt-4o",
+                    "messages": [
+                      {
+                        "role": "system",
+                        "content": "You are an AI assistant who helps people find information. As the assistant, \nyou answer questions briefly, succinctly, and in a personable manner using \nmarkdown and even add some personal flair with appropriate emojis.\n\n# Customer\nYou are helping Matteo to find answers to their questions.\nUse their name to address them in your responses.\n\n\n# Context\nUse the following context to provide a more personalized response to Matteo:\nContoso Electronics is a leader in the aerospace industry, providing advanced electronic  components for both commercial and military aircraft. We specialize in creating cutting edge systems that are both reliable and efficient. Our mission is to provide the highest  quality aircraft components to our customers, while maintaining a commitment to safety  and excellence. We are proud to have built a strong reputation in the aerospace industry  and strive to continually improve our products and services. Our experienced team of  engineers and technicians are dedicated to providing the best products and services to our  customers. With our commitment to excellence, we are sure to remain a leader in the aerospace industry for years to come"
+                      },
+                      {
+                        "role": "user",
+                        "content": "Which type of srvices does Contoso Electronics provide?"
+                      }
+                    ]
+                  },
+                  "output": {
+                    "id": "chatcmpl-9oSTvkHUZatcDxLoGaHJ2mA9vsUAI",
+                    "choices": [
+                      {
+                        "finish_reason": "stop",
+                        "index": 0,
+                        "logprobs": null,
+                        "message": {
+                          "content": "Hey Matteo! Contoso Electronics offers services focused on the aerospace industry, including:\n\n1. **Advanced Electronic Components:** Tailored for both commercial and military aircraft.\n2. **Cutting-Edge Systems:** Reliable and efficient solutions for various aviation needs.\n3. **Engineering and Technical Support:** A dedicated team ensuring top-notch product performance.\n\nWe pride ourselves on providing high-quality, safe, and innovative solutions to meet our customers' needs. ✈️🔧\n\nGot any more questions? Feel free to ask!",
+                          "role": "assistant",
+                          "function_call": null,
+                          "tool_calls": null
+                        },
+                        "content_filter_results": {
+                          "hate": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "self_harm": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "sexual": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "violence": {
+                            "filtered": false,
+                            "severity": "safe"
+                          }
+                        }
+                      }
+                    ],
+                    "created": 1721812911,
+                    "model": "gpt-4o-2024-05-13",
+                    "object": "chat.completion",
+                    "service_tier": null,
+                    "system_fingerprint": "fp_abc28019ad",
+                    "usage": {
+                      "completion_tokens": 103,
+                      "prompt_tokens": 233,
+                      "total_tokens": 336
+                    },
+                    "prompt_filter_results": [
+                      {
+                        "prompt_index": 0,
+                        "content_filter_results": {
+                          "hate": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "self_harm": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "sexual": {
+                            "filtered": false,
+                            "severity": "safe"
+                          },
+                          "violence": {
+                            "filtered": false,
+                            "severity": "safe"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "start_time": 1721805708.546454,
+                  "end_time": 1721805714.412724,
+                  "error": null,
+                  "children": [],
+                  "node_name": null,
+                  "parent_id": "42f6893d-b6e6-462c-9eb8-3b14445c0c7c",
+                  "id": "224cb4a1-564e-4fc3-a092-ef8b7679206b",
+                  "function": "openai.resources.chat.completions.Completions.create",
+                  "system_metrics": {
+                    "completion_tokens": 103,
+                    "prompt_tokens": 233,
+                    "total_tokens": 336
+                  }
+                }
+              ],
+              "node_name": null,
+              "parent_id": "5c383000-0466-4d4f-b884-d67b383a42b6",
+              "id": "42f6893d-b6e6-462c-9eb8-3b14445c0c7c",
+              "function": "Prompty",
+              "system_metrics": {
+                "completion_tokens": 103,
+                "prompt_tokens": 233,
+                "total_tokens": 336
+              }
+            }
+          ],
+          "node_name": null,
+          "parent_id": "",
+          "id": "5c383000-0466-4d4f-b884-d67b383a42b6",
+          "function": "Prompty",
+          "system_metrics": {
+            "completion_tokens": 103,
+            "prompt_tokens": 233,
+            "total_tokens": 336
+          }
+        }
+      ],
+      "name": "",
+      "description": "",
+      "tags": null,
+      "system_metrics": {
+        "completion_tokens": 103,
+        "prompt_tokens": 233,
+        "total_tokens": 336,
+        "duration": 6.252257
+      },
+      "result": {
+        "output": "Hey Matteo! Contoso Electronics offers services focused on the aerospace industry, including:\n\n1. **Advanced Electronic Components:** Tailored for both commercial and military aircraft.\n2. **Cutting-Edge Systems:** Reliable and efficient solutions for various aviation needs.\n3. **Engineering and Technical Support:** A dedicated team ensuring top-notch product performance.\n\nWe pride ourselves on providing high-quality, safe, and innovative solutions to meet our customers' needs. ✈️🔧\n\nGot any more questions? Feel free to ask!"
+      },
+      "upload_metrics": false,
+      "otel_trace_id": "0xe43adcd46f67f38fd629b5fe9fbd46b9",
+      "message_format": "basic"
+    }
+  ],
+  "node_runs": []
+}
