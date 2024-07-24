@@ -22,6 +22,7 @@ These samples are used as a companion for some of the presentations I delivered 
     - [SemanticKernel.ChatMemory](#semantickernelchatmemory)
     - [SemanticKernel.PlannerTicket](#semantickernelplannerticket)
     - [SemanticKernel.Plugins](#semantickernelplugins)
+    - [SemanticKernel.Prompty](#semantickernelprompty)
   - [License](#license)
   
 ## Prerequisites
@@ -103,6 +104,9 @@ This project is another example of using Semantic Kernel to create AI agents. In
 
 ### SemanticKernel.Plugins
 This project contains the plugins used in the previous samples. It's a shared library that is referenced by the other projects.
+
+### SemanticKernel.Prompty
+This project is an example of using Semantic Kernel with Prompty, a new solution to standardize prompts and its execution into a single asset that we can use to improve the management of our prompts in our applications.
 
 ## License
 This repository is licensed under the MIT License. See the LICENSE file for more information.
