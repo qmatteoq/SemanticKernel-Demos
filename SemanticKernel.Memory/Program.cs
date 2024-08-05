@@ -6,7 +6,7 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("2d112f3a-9cf4-4b55-931e-474661e9d70d")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];

@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Plugins.OpenApi;
 using SemanticKernel.Plugins.Plugins.TicketPlugin;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("d8c59b05-94be-43c9-abca-1445b4d2d06f")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];

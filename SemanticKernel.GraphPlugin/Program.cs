@@ -8,7 +8,7 @@ using Microsoft.SemanticKernel.Plugins.MsGraph;
 using Microsoft.SemanticKernel.Plugins.MsGraph.Connectors;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("ee2ccf8c-37a6-4671-aaf4-a55a16903918")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];

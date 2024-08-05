@@ -4,7 +4,7 @@ using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
 using Microsoft.SemanticKernel.Planning;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("7c81681b-0553-4bfc-985e-b84345deffe8")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];

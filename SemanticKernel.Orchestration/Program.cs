@@ -4,10 +4,9 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using SemanticKernel.Plugins.Models;
 using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
-using System.Text.Json;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("38200dae-db69-441e-b03a-86f740caac94")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];
@@ -24,33 +23,18 @@ string prompt = @"Write a paragraph to share the population of the United States
 Make sure to specify how many people, among the population, identify themselves as male and female. 
 Don't share approximations, please share the exact numbers.";
 
-////manual function execution
-//OpenAIPromptExecutionSettings settings = new()
-//{
-//    ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions,
-//};
+//manual function execution
+//IChatCompletionService chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
-//var chatHistory = new ChatHistory();
-//chatHistory.AddMessage(AuthorRole.User, prompt);
+//// Enable Automatic Function Calling
+//OpenAIPromptExecutionSettings executionSettings = new() { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
 
-//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-//var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+//// Initialize chat history
+//ChatHistory chatHistory = new();
+//chatHistory.AddUserMessage(prompt);
 
-//var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
-//foreach (var functionCall in functionCalls)
-//{
-//    KernelFunction pluginFunction;
-//    KernelArguments arguments;
-//    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
-//    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-//    var jsonResponse = functionResult.GetValue<object>();
-//    var json = JsonSerializer.Serialize(jsonResponse);
-//    Console.WriteLine(json);
-//    chatHistory.AddMessage(AuthorRole.Tool, json);
-//}
-
-//result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-
+//// Generate and execute a plan
+//ChatMessageContent result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, executionSettings, kernel);
 //Console.WriteLine(result.Content);
 
 // automatic function calling

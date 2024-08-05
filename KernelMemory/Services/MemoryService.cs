@@ -1,7 +1,5 @@
-﻿using Elastic.Clients.Elasticsearch.Ingest;
-using KernelMemory.Models;
+﻿using KernelMemory.Models;
 using Microsoft.KernelMemory;
-using Document = Microsoft.KernelMemory.Document;
 
 namespace KernelMemory.Services
 {

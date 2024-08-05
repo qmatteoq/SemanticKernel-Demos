@@ -7,7 +7,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 using System.Text.Json;
 
 var configuration = new ConfigurationBuilder()
-    .AddUserSecrets("5b68dc4b-5ae4-44c4-a65b-6ae334716c74")
+    .AddUserSecrets<Program>()
     .Build();
 
 string apiKey = configuration["AzureOpenAI:ApiKey"];
@@ -38,28 +38,18 @@ await foreach (var message in results)
 Console.WriteLine();
 Console.ReadLine();
 
+//manual execution
+//IChatCompletionService chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 
-//var chatHistory = new ChatHistory();
-//chatHistory.AddMessage(AuthorRole.User, "What is Semantic Kernel from Microsoft?");
+//// Enable Automatic Function Calling
+//OpenAIPromptExecutionSettings executionSettings = new() { ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions };
 
-//var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
-//var result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
+//// Initialize chat history
+//ChatHistory chatHistory = new();
+//chatHistory.AddUserMessage(prompt);
 
-//var functionCalls = ((OpenAIChatMessageContent)result).GetOpenAIFunctionToolCalls();
-//foreach (var functionCall in functionCalls)
-//{
-//    KernelFunction pluginFunction;
-//    KernelArguments arguments;
-//    kernel.Plugins.TryGetFunctionAndArguments(functionCall, out pluginFunction, out arguments);
-//    var functionResult = await kernel.InvokeAsync(pluginFunction!, arguments!);
-//    var jsonResponse = functionResult.GetValue<object>();
-//    var json = JsonSerializer.Serialize(jsonResponse);
-//    Console.WriteLine(json);
-//    chatHistory.AddMessage(AuthorRole.Tool, json);
-//}
-
-//result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, settings, kernel);
-
+//// Generate and execute a plan
+//ChatMessageContent result = await chatCompletionService.GetChatMessageContentAsync(chatHistory, executionSettings, kernel);
 //Console.WriteLine(result.Content);
 
 
