@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.PlannerTicke
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.KernelMemoryPlugin", "SemanticKernel.KernelMemoryPlugin\SemanticKernel.KernelMemoryPlugin.csproj", "{805AEA63-DB1E-444B-B539-802DE1390C0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.Prompty", "SemanticKernel.Prompty\SemanticKernel.Prompty.csproj", "{6377072C-AC5F-43CF-933C-24E03B0A4044}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Prompty", "SemanticKernel.Prompty\SemanticKernel.Prompty.csproj", "{6377072C-AC5F-43CF-933C-24E03B0A4044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.Agents", "SemanticKernel.Agents\SemanticKernel.Agents.csproj", "{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{6377072C-AC5F-43CF-933C-24E03B0A4044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6377072C-AC5F-43CF-933C-24E03B0A4044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6377072C-AC5F-43CF-933C-24E03B0A4044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
