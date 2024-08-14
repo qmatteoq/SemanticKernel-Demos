@@ -15,7 +15,6 @@ namespace SemanticKernel.Agents.Scenarios
                 Console.WriteLine();
                 Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");
                 Console.WriteLine();
-                await Task.Delay(TimeSpan.FromSeconds(180));
             }
 
             Console.WriteLine($"# IS COMPLETE: {chat.IsComplete}");

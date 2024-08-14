@@ -5,7 +5,7 @@ using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace SemanticKernel.Agents.Scenarios
 {
-    public class TravelScenario
+    public class TravelScenario: BaseScenario
     {
 
         const string travelManagerName = "TravelManager";
@@ -15,7 +15,7 @@ namespace SemanticKernel.Agents.Scenarios
 
         private AgentGroupChat chat;
 
-        public void InitializeScenario()
+        public void InitializeScenario(bool useAzureOpenAI)
         {
             string travelManagerInstructions = """
     You are a travel manager and your goal is to validate a given trip plan. 
@@ -57,28 +57,28 @@ namespace SemanticKernel.Agents.Scenarios
             {
                 Name = travelAgentName,
                 Instructions = travelAgentInstructions,
-                Kernel = KernelCreator.CreateKernel()
+                Kernel = KernelCreator.CreateKernel(useAzureOpenAI)
             };
 
             ChatCompletionAgent travelManager = new ChatCompletionAgent
             {
                 Name = travelManagerName,
                 Instructions = travelManagerInstructions,
-                Kernel = KernelCreator.CreateKernel()
+                Kernel = KernelCreator.CreateKernel(useAzureOpenAI)
             };
 
             ChatCompletionAgent trainAgent = new ChatCompletionAgent
             {
                 Name = trainExpertName,
                 Instructions = trainExpertInstructions,
-                Kernel = KernelCreator.CreateKernel()
+                Kernel = KernelCreator.CreateKernel(useAzureOpenAI)
             };
 
             ChatCompletionAgent flightAgent = new ChatCompletionAgent
             {
                 Name = flightExpertName,
                 Instructions = flightExpertInstructions,
-                Kernel = KernelCreator.CreateKernel()
+                Kernel = KernelCreator.CreateKernel(useAzureOpenAI)
             };
 
             KernelFunction terminateFunction = KernelFunctionFactory.CreateFromPrompt(
@@ -123,35 +123,20 @@ namespace SemanticKernel.Agents.Scenarios
             {
                 ExecutionSettings = new()
                 {
-                    TerminationStrategy = new KernelFunctionTerminationStrategy(terminateFunction, KernelCreator.CreateKernel())
+                    TerminationStrategy = new KernelFunctionTerminationStrategy(terminateFunction, KernelCreator.CreateKernel(useAzureOpenAI))
                     {
                         Agents = [travelManager],
                         ResultParser = (result) => result.GetValue<string>()?.Contains("yes", StringComparison.OrdinalIgnoreCase) ?? false,
                         HistoryVariableName = "history",
                         MaximumIterations = 10
                     },
-                    SelectionStrategy = new KernelFunctionSelectionStrategy(selectionFunction, KernelCreator.CreateKernel())
+                    SelectionStrategy = new KernelFunctionSelectionStrategy(selectionFunction, KernelCreator.CreateKernel(useAzureOpenAI))
                     {
                         AgentsVariableName = "agents",
                         HistoryVariableName = "history"
                     }
                 }
             };
-        }
-
-        public async Task ExecuteScenario(string prompt)
-        {
-            chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, prompt));
-            await foreach (var content in chat.InvokeAsync())
-            {
-                Console.WriteLine();
-                Console.WriteLine($"# {content.Role} - {content.AuthorName ?? "*"}: '{content.Content}'");
-                Console.WriteLine();
-                await Task.Delay(TimeSpan.FromSeconds(180));
-            }
-
-            Console.WriteLine($"# IS COMPLETE: {chat.IsComplete}");
-
         }
     }
 }
