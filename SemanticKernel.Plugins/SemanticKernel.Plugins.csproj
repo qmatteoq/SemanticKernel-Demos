@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.15.1" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.18.2" />
   </ItemGroup>
 
 </Project>

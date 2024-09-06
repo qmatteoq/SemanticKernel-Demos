@@ -4,9 +4,12 @@ using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace SemanticKernel.Agents.Scenarios
 {
-    public class BaseScenario
+    public abstract class BaseScenario
     {
         protected AgentGroupChat chat;
+
+        public abstract void InitializeScenario(bool useAzureOpenAI);
+
         public async Task ExecuteScenario(string prompt)
         {
             chat.AddChatMessage(new ChatMessageContent(AuthorRole.User, prompt));

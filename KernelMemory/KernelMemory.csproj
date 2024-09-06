@@ -9,8 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-    <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.67.240712.1" />
-    <PackageReference Include="Microsoft.KernelMemory.WebClient" Version="0.67.240712.1" />
+    <PackageReference Include="Microsoft.KernelMemory.Core" Version="0.72.240904.1" />
+    <PackageReference Include="Microsoft.KernelMemory.WebClient" Version="0.72.240904.1" />
   </ItemGroup>
 
 </Project>

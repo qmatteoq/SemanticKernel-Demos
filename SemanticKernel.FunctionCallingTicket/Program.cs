@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Planning;
-using Microsoft.SemanticKernel.Plugins.OpenApi;
 using SemanticKernel.Plugins.Plugins.TicketPlugin;
 
 var configuration = new ConfigurationBuilder()

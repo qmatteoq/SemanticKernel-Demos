@@ -6,7 +6,7 @@ namespace SemanticKernel.Agents.Scenarios
 {
     public class PromptImprovementScenario: BaseScenario
     {
-        public void InitializeScenario(bool useAzureOpenAI)
+        public override void InitializeScenario(bool useAzureOpenAI)
         {
             string promptValidatorName = "PromptValidator";
             string promptValidatorInstructions = """

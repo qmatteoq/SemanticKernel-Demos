@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
@@ -21,7 +21,7 @@ Sign the mail as AI Assistant.
 Text: ```{{$input}}```
 """;
 
-var mailFunction = kernel.CreateFunctionFromPrompt(prompt, new OpenAIPromptExecutionSettings
+var mailFunction = kernel.CreateFunctionFromPrompt(prompt, new AzureOpenAIPromptExecutionSettings
 {
     Temperature = 0.7,
     MaxTokens = 1000,

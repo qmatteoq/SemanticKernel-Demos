@@ -1,13 +1,11 @@
 ﻿using Microsoft.SemanticKernel.Agents;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Agents.Chat;
-using Microsoft.SemanticKernel.ChatCompletion;
 
 namespace SemanticKernel.Agents.Scenarios
 {
     public class TravelScenario: BaseScenario
     {
-
         const string travelManagerName = "TravelManager";
         const string travelAgentName = "TravelAgent";
         const string flightExpertName = "FlightExpert";
@@ -15,7 +13,7 @@ namespace SemanticKernel.Agents.Scenarios
 
         private AgentGroupChat chat;
 
-        public void InitializeScenario(bool useAzureOpenAI)
+        public override void InitializeScenario(bool useAzureOpenAI)
         {
             string travelManagerInstructions = """
     You are a travel manager and your goal is to validate a given trip plan. 

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Graph;
 using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using Microsoft.SemanticKernel.Plugins.MsGraph;
 using Microsoft.SemanticKernel.Plugins.MsGraph.Connectors;
@@ -60,7 +60,7 @@ CalendarPlugin plugin = new CalendarPlugin(connector);
 
 kernel.ImportPluginFromObject(plugin, "CalendarPlugin");
 
-OpenAIPromptExecutionSettings settings = new()
+AzureOpenAIPromptExecutionSettings settings = new()
 {
     ToolCallBehavior = ToolCallBehavior.EnableKernelFunctions
 };

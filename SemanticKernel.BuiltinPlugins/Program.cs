@@ -2,9 +2,10 @@
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.Plugins.Web.Bing;
 using Microsoft.SemanticKernel.Plugins.Web;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.ChatCompletion;
 using System.Text.Json;
+using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 var configuration = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
@@ -24,7 +25,7 @@ var bingConnector = new BingConnector(bingKey);
 var plugin = new WebSearchEnginePlugin(bingConnector);
 kernel.ImportPluginFromObject(plugin, "BingPlugin");
 
-OpenAIPromptExecutionSettings settings = new()
+AzureOpenAIPromptExecutionSettings settings = new()
 {
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
 };

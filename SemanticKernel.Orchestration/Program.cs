@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 using SemanticKernel.Plugins.Models;
 using SemanticKernel.Plugins.Plugins.UnitedStatesPlugin;
@@ -39,7 +40,7 @@ Don't share approximations, please share the exact numbers.";
 
 // automatic function calling
 
-OpenAIPromptExecutionSettings settings = new()
+AzureOpenAIPromptExecutionSettings settings = new()
 {
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
 };

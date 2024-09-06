@@ -2,6 +2,7 @@
 using Microsoft.KernelMemory;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.ChatCompletion;
+using Microsoft.SemanticKernel.Connectors.AzureOpenAI;
 using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 
@@ -61,7 +62,7 @@ kernel.ImportPluginFromPromptDirectory(pluginsDirectory, "MailPlugin");
 var plugin = new MemoryPlugin(kernelMemory, waitForIngestionToComplete: true);
 kernel.ImportPluginFromObject(plugin, "memory");
 
-OpenAIPromptExecutionSettings settings = new()
+AzureOpenAIPromptExecutionSettings settings = new()
 {
     ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
 };
