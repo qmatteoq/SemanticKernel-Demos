@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.KernelMemory
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Prompty", "SemanticKernel.Prompty\SemanticKernel.Prompty.csproj", "{6377072C-AC5F-43CF-933C-24E03B0A4044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.Agents", "SemanticKernel.Agents\SemanticKernel.Agents.csproj", "{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SemanticKernel.Agents", "SemanticKernel.Agents\SemanticKernel.Agents.csproj", "{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5A15B935-B600-44E7-B376-CE0F92941340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemanticKernel.Ollama", "SemanticKernel.Ollama\SemanticKernel.Ollama.csproj", "{FE8D561E-5482-4DF6-B51D-0B315FC330F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +115,10 @@ Global
 		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7940E7EA-5E5D-40FA-9F87-10A8D0B5D31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE8D561E-5482-4DF6-B51D-0B315FC330F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE8D561E-5482-4DF6-B51D-0B315FC330F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE8D561E-5482-4DF6-B51D-0B315FC330F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE8D561E-5482-4DF6-B51D-0B315FC330F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
