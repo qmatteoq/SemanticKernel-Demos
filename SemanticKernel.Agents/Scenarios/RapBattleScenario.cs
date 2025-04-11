@@ -25,7 +25,6 @@ namespace SemanticKernel.Agents.Scenarios
                 Kernel = KernelCreator.CreateKernel(useAzureOpenAI)
             };
 
-
             ChatCompletionAgent eminemAgent = new ChatCompletionAgent
             {
                 Name = eminemName,

@@ -5,7 +5,9 @@ Console.WriteLine("1) Travel agency");
 Console.WriteLine("2) Prompt Improvement");
 Console.WriteLine("3) Developer");
 Console.WriteLine("4) Rap battle");
+Console.WriteLine("5) Creator Writer");
 Console.WriteLine("Type the number of the scenario you want to run and press Enter");
+
 string response = Console.ReadLine();
 string prompt = string.Empty;
 switch (response)
@@ -42,6 +44,15 @@ switch (response)
         Console.WriteLine("Write your topic:");
         prompt = Console.ReadLine();
         await rapBattleScenario.ExecuteScenario(prompt);
+        break;
+    case "5":
+
+        CreatorWriterScenario creatorWriterScenario = new CreatorWriterScenario();
+        await creatorWriterScenario.InitializeScenarioAsync(false);
+
+        Console.WriteLine("Write your topic:");
+        prompt = Console.ReadLine();
+        await creatorWriterScenario.ExecuteScenario(prompt);
         break;
     default:
         Console.WriteLine("Invalid option");

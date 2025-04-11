@@ -4,14 +4,12 @@ using Microsoft.SemanticKernel.Agents.Chat;
 
 namespace SemanticKernel.Agents.Scenarios
 {
-    public class TravelScenario: BaseScenario
+    public class TravelScenario : BaseScenario
     {
         const string travelManagerName = "TravelManager";
         const string travelAgentName = "TravelAgent";
         const string flightExpertName = "FlightExpert";
         const string trainExpertName = "TrainExpert";
-
-        private AgentGroupChat chat;
 
         public override void InitializeScenario(bool useAzureOpenAI)
         {
@@ -88,8 +86,6 @@ namespace SemanticKernel.Agents.Scenarios
                 {{$history}}
                 """
                 );
-
-
 
             KernelFunction selectionFunction = KernelFunctionFactory.CreateFromPrompt(
                 $$$"""

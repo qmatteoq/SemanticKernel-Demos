@@ -8,7 +8,14 @@ namespace SemanticKernel.Agents.Scenarios
     {
         protected AgentGroupChat chat;
 
-        public abstract void InitializeScenario(bool useAzureOpenAI);
+        public virtual void InitializeScenario(bool useAzureOpenAI)
+        {
+        }
+
+        public virtual Task InitializeScenarioAsync(bool useAzureOpenAI) 
+        {
+            return Task.CompletedTask;
+        }
 
         public async Task ExecuteScenario(string prompt)
         {
